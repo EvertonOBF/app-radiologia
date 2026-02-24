@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado: Ondulatória na Radiologia</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { margin-bottom: 25px; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; }
+        .question-text { font-weight: bold; margin-bottom: 15px; display: block; }
+        .options { list-style: none; padding: 0; }
+        .option { background: #f8f9fa; border: 1px solid #ddd; margin-bottom: 8px; padding: 12px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        .option:hover { background: #e9ecef; }
+        .correct { background-color: #d4edda !important; border-color: #c3e6cb !important; color: #155724; font-weight: bold; }
+        .incorrect { background-color: #f8d7da !important; border-color: #f5c6cb !important; color: #721c24; }
+        .explanation { margin-top: 10px; padding: 15px; background: #e7f3ff; border-left: 5px solid #3498db; display: none; border-radius: 4px; font-size: 0.95em; }
+        .btn-reset { display: block; width: 100%; padding: 10px; background: #3498db; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Simulado: Fundamentos de Ondulatória</h1>
+    <p style="text-align: center;"><i>Nível: Básico a Intermediário</i></p>
+
+    <div id="quiz"></div>
+
+    <button class="btn-reset" onclick="location.reload()">Reiniciar Simulado</button>
+</div>
+
+<script>
+const questions = [
+    {
+        q: "1. Os Raios X são classificados como ondas de que natureza?",
+        options: ["Mecânicas", "Eletromagnéticas", "Sonoras", "Longitudinais", "Gravitacionais"],
+        correct: 1,
+        exp: "Os Raios X são ondas eletromagnéticas. Diferente das ondas mecânicas (como o som), elas não precisam de um meio material para se propagar, podendo viajar no vácuo."
+    },
+    {
+        q: "2. O que define o 'comprimento de onda' (λ)?",
+        options: ["O número de oscilações por segundo.", "A altura máxima da crista da onda.", "A distância entre dois picos ou duas cristas consecutivas.", "A velocidade com que a onda se desloca.", "O tempo necessário para completar um ciclo."],
+        correct: 2,
+        exp: "O comprimento de onda (λ) é a distância física entre dois pontos idênticos sucessivos da onda, como de crista a crista ou de vale a vale."
+    },
+    {
+        q: "3. Na física das radiações, qual é a relação entre frequência (f) e comprimento de onda (λ)?",
+        options: ["Diretamente proporcionais.", "Não possuem relação.", "Inversamente proporcionais.", "São grandezas idênticas.", "A frequência depende apenas da amplitude."],
+        correct: 2,
+        exp: "Eles são inversamente proporcionais. Como a velocidade da luz é constante (c = λ . f), quanto menor o comprimento de onda, maior será a sua frequência (e maior sua energia)."
+    },
+    {
+        q: "4. A unidade de medida da frequência no Sistema Internacional (SI) é o:",
+        options: ["Metro (m)", "Joule (J)", "Watt (W)", "Hertz (Hz)", "Newton (N)"],
+        correct: 3,
+        exp: "O Hertz (Hz) mede o número de ciclos ou oscilações que ocorrem em um segundo."
+    },
+    {
+        q: "5. Sobre a Amplitude de uma onda, é correto afirmar que ela representa:",
+        options: ["A distância entre duas cristas.", "O 'brilho' ou intensidade da radiação (altura da onda).", "A velocidade de propagação no vácuo.", "A capacidade de penetração no paciente.", "O tempo de exposição radiográfica."],
+        correct: 1,
+        exp: "A amplitude está relacionada à intensidade da onda (sua 'altura'). Na radiologia, alterações na amplitude podem estar associadas à quantidade de fótons, mas não à sua energia individual (qualidade)."
+    },
+    {
+        q: "6. Qual das radiações abaixo possui o menor comprimento de onda e, consequentemente, maior frequência?",
+        options: ["Ondas de rádio", "Luz visível", "Micro-ondas", "Raios X", "Infravermelho"],
+        correct: 3,
+        exp: "No espectro eletromagnético, os Raios X possuem comprimentos de onda curtíssimos e frequências altíssimas, o que lhes confere alto poder de penetração."
+    },
+    {
+        q: "7. A velocidade de propagação de uma onda eletromagnética no vácuo é de aproximadamente:",
+        options: ["340 m/s", "1.500 m/s", "300.000 km/s", "100.000 km/h", "30.000 m/s"],
+        correct: 2,
+        exp: "Todas as ondas eletromagnéticas (incluindo Raios X e luz) viajam à velocidade da luz, cerca de 300.000 km/s (ou 3x10^8 m/s) no vácuo."
+    },
+    {
+        q: "8. Uma onda que possui alta frequência terá, necessariamente:",
+        options: ["Grande comprimento de onda.", "Baixa energia.", "Pequeno comprimento de onda.", "Baixa velocidade.", "Amplitude nula."],
+        correct: 2,
+        exp: "Pela equação fundamental, alta frequência implica em um comprimento de onda curto (pequeno). Na radiologia, isso significa radiação mais 'dura' e penetrante."
+    },
+    {
+        q: "9. Ondas sonoras (usadas no Ultrassom) diferem dos Raios X porque:",
+        options: ["São mais rápidas que a luz.", "São ondas mecânicas e exigem um meio material.", "Não possuem frequência.", "São radiações ionizantes.", "Viajam melhor no vácuo."],
+        correct: 1,
+        exp: "O som é uma onda mecânica; ele precisa de moléculas (ar, água, tecido humano) para vibrar e se propagar. Os Raios X, sendo eletromagnéticos, não precisam."
+    },
+    {
+        q: "10. O termo 'período' (T) em ondulatória refere-se a:",
+        options: ["A distância total percorrida pela onda.", "O tempo necessário para uma onda completar um ciclo completo.", "A força do feixe de elétrons.", "O número de fótons produzidos por segundo.", "A espessura do filtro de alumínio."],
+        correct: 1,
+        exp: "O período (T) é o inverso da frequência (T = 1/f). Ele mede o tempo (segundos) que leva para um ciclo completo ocorrer."
+    }
+];
+
+const quizContainer = document.getElementById('quiz');
+
+questions.forEach((item, index) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+    
+    const qText = document.createElement('span');
+    qText.className = 'question-text';
+    qText.innerText = item.q;
+    qDiv.appendChild(qText);
+    
+    const optionsUl = document.createElement('ul');
+    optionsUl.className = 'options';
+    
+    item.options.forEach((opt, optIndex) => {
+        const li = document.createElement('li');
+        li.className = 'option';
+        li.innerText = opt;
+        li.onclick = () => checkAnswer(li, index, optIndex, item.correct, item.exp);
+        optionsUl.appendChild(li);
+    });
+    
+    qDiv.appendChild(optionsUl);
+    
+    const expDiv = document.createElement('div');
+    expDiv.id = `exp-${index}`;
+    expDiv.className = 'explanation';
+    qDiv.appendChild(expDiv);
+    
+    quizContainer.appendChild(qDiv);
+});
+
+function checkAnswer(element, qIndex, selectedIndex, correctIndex, explanation) {
+    const options = element.parentElement.children;
+    
+    // Desabilitar cliques após escolha
+    for(let opt of options) { opt.style.pointerEvents = 'none'; }
+    
+    if(selectedIndex === correctIndex) {
+        element.classList.add('correct');
+    } else {
+        element.classList.add('incorrect');
+        options[correctIndex].classList.add('correct');
+    }
+    
+    const expDiv = document.getElementById(`exp-${qIndex}`);
+    expDiv.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+    expDiv.style.display = 'block';
+}
+</script>
+
+</body>
+</html>

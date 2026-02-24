@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Diagnóstico: Ondulatória na Radiologia</title>
+    <style>
+        :root { --primary: #0284c7; --success: #16a34a; --error: #dc2626; --bg: #f0f9ff; --text: #0f172a; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg); margin: 0; padding: 15px; color: var(--text); line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        h1 { font-size: 1.8rem; color: #0369a1; text-align: center; margin-top: 5px; margin-bottom: 5px; }
+        p.subtitle { text-align: center; color: #64748b; font-size: 1rem; margin-bottom: 30px; }
+        
+        .question-card { background: #ffffff; border: 2px solid #e2e8f0; padding: 20px; border-radius: 12px; margin-bottom: 25px; transition: border-color 0.3s; }
+        .question-card:hover { border-color: #bae6fd; }
+        .q-text { font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 18px; color: #1e293b; }
+        
+        .options-list { display: flex; flex-direction: column; gap: 12px; }
+        .opt-btn { background: #f8fafc; border: 2px solid #cbd5e1; padding: 15px; border-radius: 8px; cursor: pointer; text-align: left; font-size: 1rem; font-weight: 500; color: #334155; transition: all 0.2s ease; -webkit-tap-highlight-color: transparent; }
+        .opt-btn:hover:not([style*="pointer-events: none"]) { background: #f1f5f9; border-color: #94a3b8; }
+        .opt-btn:active:not([style*="pointer-events: none"]) { transform: scale(0.98); }
+        
+        .correct { background-color: #dcfce7 !important; border-color: var(--success) !important; color: #14532d !important; font-weight: 700; }
+        .incorrect { background-color: #fee2e2 !important; border-color: var(--error) !important; color: #7f1d1d !important; font-weight: 700; text-decoration: line-through; }
+        
+        .feedback { margin-top: 15px; padding: 15px; background: #e0f2fe; border-radius: 8px; font-size: 0.95rem; display: none; border-left: 5px solid var(--primary); color: #0369a1; animation: fadeIn 0.4s ease-in-out; }
+        
+        /* Estilos do Resultado Final */
+        #result-container { display: none; background: #f8fafc; border: 2px dashed #0ea5e9; padding: 25px; border-radius: 12px; margin-top: 30px; text-align: center; animation: fadeIn 0.6s ease-in-out; }
+        .score-circle { width: 100px; height: 100px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 15px auto; }
+        .result-title { font-size: 1.5rem; color: #0f172a; margin-bottom: 10px; }
+        .diagnostic-box { background: #fff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; text-align: left; margin-top: 20px; }
+        .diagnostic-box h3 { color: #b91c1c; margin-top: 0; font-size: 1.1rem; }
+        .diagnostic-box ul { padding-left: 20px; color: #475569; }
+        .diagnostic-box li { margin-bottom: 8px; }
+        
+        .btn-reload { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; margin-top: 25px; transition: background 0.3s; }
+        .btn-reload:hover { background: #0369a1; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Ondulatória Aplicada</h1>
+    <p class="subtitle">Conectando a Física ao dia a dia do Técnico em Radiologia</p>
+
+    <div id="quiz-flow"></div>
+
+    <div id="result-container">
+        <div class="score-circle"><span id="score-text">0/10</span></div>
+        <h2 class="result-title" id="result-title">Análise de Desempenho</h2>
+        <p id="result-message"></p>
+        
+        <div class="diagnostic-box" id="diagnostic-box" style="display: none;">
+            <h3>⚠️ Atenção aos seguintes tópicos:</h3>
+            <p>Com base nos seus erros, recomendamos que você revise os seguintes conceitos:</p>
+            <ul id="weak-topics-list"></ul>
+        </div>
+        
+        <button class="btn-reload" onclick="location.reload()">Refazer Simulado</button>
+    </div>
+</div>
+
+<script>
+// Array de questões com a adição da propriedade "topic"
+const questions = [
+    {
+        q: "1. Ao aumentar o kV no painel de comando, o técnico gera um feixe de Raios X com maior poder de penetração. Fisicamente, o que ocorre com a onda?",
+        options: ["A onda aumenta seu comprimento e diminui sua frequência.", "A onda se torna mecânica para atravessar o osso.", "A onda diminui seu comprimento e aumenta sua frequência.", "A amplitude da onda é multiplicada por dez.", "A velocidade da onda supera a velocidade da luz."],
+        correct: 2,
+        topic: "Relação kV, Frequência e Comprimento de Onda",
+        exp: "O kV controla a qualidade (energia). Mais kV = Alta Frequência = Curto Comprimento de Onda."
+    },
+    {
+        q: "2. O técnico ajusta o mAs para clarear ou escurecer a imagem. Alterar a quantidade de fótons sem alterar sua energia de penetração afeta qual propriedade da onda?",
+        options: ["Frequência", "Amplitude", "Comprimento de onda", "Velocidade de propagação", "Natureza eletromagnética"],
+        correct: 1,
+        topic: "Intensidade e Amplitude (mAs)",
+        exp: "O mAs altera a Amplitude (intensidade) do feixe, a 'quantidade' de fótons, mas não o comprimento de onda ou a frequência."
+    },
+    {
+        q: "3. Por que os Raios X são capazes de ionizar átomos do corpo humano, enquanto as ondas do rádio FM não são?",
+        options: ["Porque os Raios X possuem baixíssima frequência.", "Porque ondas de rádio são mais rápidas.", "Porque os Raios X possuem altíssima frequência e muita energia.", "Porque ondas de rádio possuem comprimento de onda muito curto.", "Porque os Raios X são ondas sonoras potentes."],
+        correct: 2,
+        topic: "Poder de Ionização e Energia",
+        exp: "A ionização depende da energia da onda. Raios X (alta frequência) conseguem arrancar elétrons dos átomos."
+    },
+    {
+        q: "4. Qual a diferença essencial entre as ondas utilizadas num aparelho de Raios X e num aparelho de Ultrassonografia?",
+        options: ["O Raio X é eletromagnético (viaja no vácuo); o Ultrassom é mecânico (precisa de matéria).", "O Ultrassom é mais rápido que a velocidade da luz.", "Ambas são eletromagnéticas, mas o Ultrassom tem maior frequência.", "O Raio X exige um meio gel para se propagar no ar.", "O Ultrassom causa mais ionização que o Raio X."],
+        correct: 0,
+        topic: "Ondas Mecânicas vs Eletromagnéticas",
+        exp: "Ultrassom usa ondas sonoras (mecânicas). Raios X são eletromagnéticos e não precisam de meio material."
+    },
+    {
+        q: "5. Em termos de ondulatória, um 'feixe duro' (ótimo para ossos espessos) caracteriza-se por:",
+        options: ["Grande comprimento de onda e baixa frequência.", "Pequena amplitude e baixa velocidade.", "Curto comprimento de onda e alta frequência.", "Ondas que se propagam em zigue-zague.", "Nenhuma frequência associada."],
+        correct: 2,
+        topic: "Qualidade do Feixe (Duro/Mole)",
+        exp: "Um feixe 'duro' é altamente penetrante, traduzindo-se em curto comprimento de onda e alta frequência."
+    },
+    {
+        q: "6. Qual é a velocidade aproximada de propagação dos Raios X ao sair da ampola no vácuo?",
+        options: ["340 m/s (velocidade do som)", "1.500 m/s (velocidade no tecido mole)", "300.000 km/s (velocidade da luz)", "Depende do valor do mAs utilizado.", "100.000 km/h"],
+        correct: 2,
+        topic: "Velocidade de Propagação",
+        exp: "Raios X viajam na velocidade da luz no vácuo (aprox. 300.000 km/s)."
+    },
+    {
+        q: "7. A atenuação sofrida pelo feixe de Raios X ao atravessar o paciente causa redução em qual aspecto da onda?",
+        options: ["Frequência", "Velocidade", "Intensidade (Amplitude)", "Comprimento de onda", "Direção gravitacional"],
+        correct: 2,
+        topic: "Atenuação de Feixe",
+        exp: "A atenuação diminui a quantidade de fótons que chegam ao receptor, reduzindo a intensidade (amplitude) do feixe."
+    },
+    {
+        q: "8. Onde se encontram os Raios X no Espectro Eletromagnético?",
+        options: ["Abaixo das ondas de rádio.", "Entre o infravermelho e as micro-ondas.", "Acima do ultravioleta e antes/junto aos Raios Gama.", "Exatamente na mesma faixa da luz vermelha.", "Fora do espectro eletromagnético."],
+        correct: 2,
+        topic: "Espectro Eletromagnético",
+        exp: "Ocupam a extremidade de alta energia do espectro, logo após o ultravioleta e dividindo espaço com os Raios Gama."
+    },
+    {
+        q: "9. Onde o comportamento 'partícula' (fóton) dos Raios X é mais evidente na radiologia?",
+        options: ["Quando viajam pelo espaço sideral.", "Na hora em que interagem (colidem) com o corpo do paciente.", "Apenas quando o equipamento está desligado.", "Quando formam ondas sonoras no ar.", "Quando sofrem refração numa lente de vidro."],
+        correct: 1,
+        topic: "Dualidade Onda-Partícula",
+        exp: "Viajam como ondas, mas interagem com a matéria (paciente/receptor) como partículas (fótons)."
+    },
+    {
+        q: "10. Se um técnico diminuir significativamente o kV para radiografar uma mão (tecido fino), o que acontecerá com o comprimento de onda do feixe?",
+        options: ["Ficará mais curto.", "Não sofrerá alteração.", "Ficará mais longo, resultando em um feixe menos penetrante.", "A onda deixará de existir.", "A velocidade da onda cairá pela metade."],
+        correct: 2,
+        topic: "Aplicação Prática do kV",
+        exp: "Menos kV = Menor Frequência = Maior Comprimento de Onda. Cria um feixe 'mole', ideal para ossos finos."
+    }
+];
+
+// Variáveis de controle do estado do simulado
+let score = 0;
+let questionsAnswered = 0;
+let wrongTopics = new Set(); // Usa Set para evitar tópicos duplicados
+
+const quizContainer = document.getElementById('quiz-flow');
+const resultContainer = document.getElementById('result-container');
+
+questions.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    
+    const qText = document.createElement('span');
+    qText.className = 'q-text';
+    qText.innerHTML = item.q;
+    card.appendChild(qText);
+    
+    const optsDiv = document.createElement('div');
+    optsDiv.className = 'options-list';
+    
+    const feedbackDiv = document.createElement('div');
+    feedbackDiv.className = 'feedback';
+    feedbackDiv.innerHTML = `<strong>💡 Explicação Didática:</strong> ${item.exp}`;
+    
+    item.options.forEach((optText, optIndex) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = optText;
+        
+        btn.onclick = function() {
+            const allBtns = optsDiv.querySelectorAll('.opt-btn');
+            allBtns.forEach(b => b.style.pointerEvents = 'none'); // Trava os botões
+            
+            questionsAnswered++;
+            
+            if (optIndex === item.correct) {
+                btn.classList.add('correct');
+                score++;
+            } else {
+                btn.classList.add('incorrect');
+                allBtns[item.correct].classList.add('correct');
+                wrongTopics.add(item.topic); // Registra a dificuldade do aluno
+            }
+            
+            feedbackDiv.style.display = 'block';
+            
+            // Verifica se o simulado acabou
+            if (questionsAnswered === questions.length) {
+                setTimeout(showFinalResults, 800); // Pequeno delay para o aluno ler a última explicação
+            }
+        };
+        
+        optsDiv.appendChild(btn);
+    });
+    
+    card.appendChild(optsDiv);
+    card.appendChild(feedbackDiv);
+    quizContainer.appendChild(card);
+});
+
+function showFinalResults() {
+    resultContainer.style.display = 'block';
+    document.getElementById('score-text').innerText = `${score}/10`;
+    
+    const titleEl = document.getElementById('result-title');
+    const msgEl = document.getElementById('result-message');
+    const diagBox = document.getElementById('diagnostic-box');
+    const weakList = document.getElementById('weak-topics-list');
+    
+    // Lógica de Feedback Mentor
+    if (score === 10) {
+        titleEl.innerText = "Excepcional!";
+        titleEl.style.color = "#16a34a";
+        msgEl.innerHTML = "Você dominou completamente os fundamentos de ondulatória aplicados à radiologia. Seu raciocínio técnico está afiadíssimo!";
+    } else if (score >= 7) {
+        titleEl.innerText = "Muito Bom!";
+        titleEl.style.color = "#0284c7";
+        msgEl.innerHTML = "Você tem uma ótima base! Apenas alguns pequenos detalhes escaparam. Revise os pontos abaixo para atingir a excelência.";
+    } else {
+        titleEl.innerText = "Atenção aos Fundamentos";
+        titleEl.style.color = "#b91c1c";
+        msgEl.innerHTML = "A física das radiações pode ser desafiadora no início. Não desanime! O segredo é revisar a teoria com calma e refazer o simulado.";
+    }
+    
+    // Mostra os tópicos que precisam de revisão
+    if (wrongTopics.size > 0) {
+        diagBox.style.display = 'block';
+        weakList.innerHTML = '';
+        wrongTopics.forEach(topic => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${topic}</strong>`;
+            weakList.appendChild(li);
+        });
+    }
+    
+    // Rola a tela suavemente para o resultado
+    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+}
+</script>
+</body>
+</html>
