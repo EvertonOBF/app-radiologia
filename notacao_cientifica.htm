@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado de Radiologia: Múltiplos e Submúltiplos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        p.intro {
+            text-align: center;
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .question-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            transition: transform 0.2s ease;
+        }
+        .question-card:hover {
+            transform: translateY(-2px);
+        }
+        .question-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-btn {
+            background-color: #ecf0f1;
+            border: 2px solid transparent;
+            padding: 12px 15px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .option-btn:hover:not(:disabled) {
+            background-color: #dcdde1;
+            border-color: #bdc3c7;
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            color: #333;
+        }
+        .option-btn.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            font-weight: bold;
+        }
+        .option-btn.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        .explanation strong {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simulado: Grandezas e Notação Científica na Radiologia</h1>
+    <p class="intro">Selecione a alternativa correta em cada questão. O feedback e a explicação didática aparecerão imediatamente após a sua escolha.</p>
+
+    <div class="question-card">
+        <div class="question-title">1. A tensão elétrica aplicada ao tubo de raios X é frequentemente medida em quilovolts (kV), responsável pelo poder de penetração do feixe. O prefixo "quilo" (k) corresponde a qual potência de base 10?</div>
+        <div class="options">
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 10<sup>-3</sup></button>
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">B) 10<sup>3</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 10<sup>6</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>-6</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 10<sup>9</sup></button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> O prefixo "quilo" (k) sempre representa mil (1.000) vezes a unidade base, o que equivale a 10<sup>3</sup>. Portanto, 1 kV (um quilovolt) equivale a 1.000 Volts. Na prática, aplicar 70 kV em um exame significa aplicar 70.000 Volts no tubo de raios X!
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">2. A quantidade de elétrons gerada no filamento do tubo de raios X é controlada pela miliamperagem (mA). O que o prefixo "mili" (m) representa matematicamente?</div>
+        <div class="options">
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) Um milhão de vezes a unidade base (10<sup>6</sup>).</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) Cem vezes a unidade base (10<sup>2</sup>).</button>
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) A milésima parte da unidade base (10<sup>-3</sup>).</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) A milionésima parte da unidade base (10<sup>-6</sup>).</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) Dez vezes a unidade base (10<sup>1</sup>).</button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> O prefixo "mili" (m) indica a divisão da unidade por 1.000, ou seja, 10<sup>-3</sup>. Assim, 1 mA (miliampere) equivale a 0,001 Ampere. Correntes altas (como Amperes inteiros) seriam muito intensas para essa finalidade, por isso trabalhamos na escala dos miliamperes.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">3. Na ultrassonografia, os transdutores emitem ondas sonoras em altas frequências, geralmente na ordem de Megahertz (MHz). O prefixo "Mega" (M) equivale a:</div>
+        <div class="options">
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 10<sup>3</sup> (Mil)</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 10<sup>9</sup> (Bilhão)</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 10<sup>-6</sup> (Milionésimo)</button>
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">D) 10<sup>6</sup> (Milhão)</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 10<sup>-3</sup> (Milésimo)</button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> O prefixo "Mega" (M maiúsculo) representa o multiplicador de um milhão (1.000.000), escrito como 10<sup>6</sup> em notação científica. Portanto, um transdutor de 5 MHz emite 5 milhões de ciclos de ondas sonoras por segundo!
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">4. Em proteção radiológica ambiental ou ocupacional, é comum medir doses muito pequenas de radiação em microsieverts (&mu;Sv). O prefixo "micro" (&mu;) corresponde a qual fator multiplicador?</div>
+        <div class="options">
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">A) 10<sup>-6</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 10<sup>-9</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 10<sup>-3</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>6</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 10<sup>-2</sup></button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> O símbolo grego "mi" (&mu;) é usado para o prefixo "micro", que indica a milionésima parte de algo, ou seja, 10<sup>-6</sup> (0,000001). 1 &mu;Sv é uma dose de radiação extremamente pequena, comum nas leituras de background natural.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">5. A atividade de um radiofármaco administrado a um paciente em exames de Medicina Nuclear (como o PET-CT) é frequentemente expressa em Gigabecquerels (GBq). O prefixo "Giga" (G) representa a potência:</div>
+        <div class="options">
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 10<sup>6</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 10<sup>12</sup></button>
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) 10<sup>9</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>-9</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 10<sup>3</sup></button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> O prefixo "Giga" (G) corresponde a 1 bilhão de vezes a unidade base, ou 10<sup>9</sup>. Como o Becquerel (Bq) é uma unidade muito pequena (representa apenas 1 desintegração radioativa por segundo), utiliza-se o Giga (bilhão de desintegrações por segundo) para doses clínicas.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">6. O comprimento de onda dos raios X é tão curto que penetra na matéria. Esse comprimento é frequentemente medido na escala dos nanômetros (nm). Qual potência de base 10 representa o prefixo "nano" (n)?</div>
+        <div class="options">
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 10<sup>-6</sup></button>
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">B) 10<sup>-9</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 10<sup>-12</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>-3</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 10<sup>9</sup></button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> O prefixo "nano" (n) representa a bilionésima parte de uma unidade, ou seja, 10<sup>-9</sup>. Um nanômetro (1 nm) é igual a 0,000000001 metros. O comprimento de onda do raio X varia de 0,01 a 10 nanômetros, explicando sua capacidade de atravessar tecidos humanos.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">7. A Distância Foco-Receptor (DFR) em radiologia convencional é habitualmente ajustada em 100 centímetros (cm) ou 180 centímetros (cm). O prefixo "centi" (c) equivale a qual multiplicador em relação ao metro?</div>
+        <div class="options">
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 10<sup>-1</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 10<sup>-3</sup></button>
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) 10<sup>-2</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>2</sup></button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 10<sup>3</sup></button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> O prefixo "centi" (c) indica a centésima parte da unidade base (dividido por 100), expresso em notação como 10<sup>-2</sup>. Portanto, 1 centímetro é 0,01 metros. 100 cm formam exatamente 1 metro.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">8. Analise a situação: Na tela do equipamento de raio X, o tempo de exposição aparece como 10 ms (milissegundos). Qual notação científica representa corretamente 1 milissegundo transformado em segundos (unidade base)?</div>
+        <div class="options">
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">A) 1 x 10<sup>-3</sup> s</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 1 x 10<sup>3</sup> s</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 1 x 10<sup>-6</sup> s</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 1 x 10<sup>6</sup> s</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 1 x 10<sup>-2</sup> s</button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> Como vimos, o "m" de mili equivale a 10<sup>-3</sup>. Logo, 1 ms é igual a 1 x 10<sup>-3</sup> segundos (ou 0,001 segundos). Exposições radiográficas ocorrem em frações de segundo para evitar que a imagem saia "tremida" ou borrada devido ao movimento do paciente.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">9. Durante a leitura de um relatório de monitoração individual (dosimetria), um estudante confunde mSv com &mu;Sv. Qual das alternativas abaixo mostra a correta diferença de grandeza entre "mili" e "micro"?</div>
+        <div class="options">
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) O "mili" (10<sup>-6</sup>) é mil vezes menor que o "micro" (10<sup>-3</sup>).</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) O "mili" (10<sup>3</sup>) e o "micro" (10<sup>6</sup>) indicam múltiplos maiores que a unidade base.</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) Ambos representam a mesma grandeza, mas são usados em equipamentos diferentes.</button>
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">A) O "mili" (10<sup>-3</sup>) é mil vezes maior que o "micro" (10<sup>-6</sup>).</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) O "mili" (10<sup>-2</sup>) é cem vezes maior que o "micro" (10<sup>-4</sup>).</button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> Exatamente! O "mili" é 10<sup>-3</sup> (0,001) e o "micro" é 10<sup>-6</sup> (0,000001). Ao comparar ambos, percebe-se que 1 mSv é 1000 vezes maior que 1 &mu;Sv. Em proteção radiológica, confundir essas unidades altera as estimativas de dose do trabalhador ou paciente em um fator de mil!
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="question-title">10. Julgue as afirmativas sobre o uso de notação científica na tecnologia em radiologia:<br><br>
+        I. O uso do prefixo "quilo" (10<sup>3</sup>) no kVp facilita a escrita de grandes números de voltagem.<br>
+        II. O tempo de relaxamento em ressonância magnética usa o "mili" (10<sup>-3</sup>) resultando em milissegundos.<br>
+        III. As frequências de ultrassom usam o "nano" (10<sup>-9</sup>), resultando em nanohertz (nHz).<br><br>
+        É correto o que se afirma em:</div>
+        <div class="options">
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) Apenas I está correta.</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) Apenas III está correta.</button>
+            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) Apenas I e II estão corretas.</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) Apenas II e III estão corretas.</button>
+            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) I, II e III estão corretas.</button>
+        </div>
+        <div class="explanation">
+            <strong>Explicação Didática:</strong> As afirmativas I e II estão perfeitas e refletem o cotidiano radiológico. A afirmativa III está <strong>errada</strong> porque as frequências de ultrassom são muito altas (ciclos curtos), utilizando o prefixo "Mega" (MHz = 10<sup>6</sup> Hertz) e não "nano". O "nano" costuma ser usado para coisas muito pequenas e não para frequências de equipamentos de diagnóstico por imagem.
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(button) {
+            // Encontra o container da questão atual
+            const container = button.closest('.question-card');
+            
+            // Se a questão já foi respondida, não faz nada
+            if (container.classList.contains('answered')) return;
+            
+            // Marca a questão como respondida
+            container.classList.add('answered');
+            
+            // Pega todos os botões e a div de explicação desta questão
+            const options = container.querySelectorAll('.option-btn');
+            const explanation = container.querySelector('.explanation');
+            
+            const isCorrect = button.getAttribute('data-correct') === 'true';
+
+            // Desabilita os botões e aplica as cores
+            options.forEach(opt => {
+                opt.disabled = true;
+                if (opt.getAttribute('data-correct') === 'true') {
+                    opt.classList.add('correct'); // Revela a certa em verde
+                }
+            });
+
+            // Se o usuário errou, pinta a que ele clicou de vermelho
+            if (!isCorrect) {
+                button.classList.add('incorrect');
+            }
+
+            // Exibe a explicação de forma suave
+            explanation.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
