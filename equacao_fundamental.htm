@@ -5,249 +5,274 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulado: Ondulatória Aplicada à Radiologia</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
+        :root { --primary: #0284c7; --success: #16a34a; --error: #dc2626; --bg: #f0f9ff; --text: #0f172a; }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg); 
+            margin: 0; 
+            padding: 20px 15px; 
+            color: var(--text); 
+            line-height: 1.6; 
         }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+        
+        .container { 
+            max-width: 800px; 
+            margin: auto; 
+            background: white; 
+            padding: 30px 25px; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08); 
         }
-        p.intro {
-            text-align: center;
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 30px;
+        
+        h1 { 
+            font-size: 1.8rem; 
+            color: #0369a1; 
+            text-align: center; 
+            margin-top: 5px; 
+            margin-bottom: 5px; 
+            border: none;
         }
-        .question-card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
-            transition: transform 0.2s ease;
+        
+        p.intro { 
+            text-align: center; 
+            color: #64748b; 
+            font-size: 1rem; 
+            margin-bottom: 30px; 
         }
-        .question-card:hover {
-            transform: translateY(-2px);
+        
+        .question-card { 
+            background: #ffffff; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 12px; 
+            padding: 20px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
         }
-        .question-title {
-            font-weight: bold;
-            font-size: 1.15em;
-            margin-bottom: 15px;
-            color: #2c3e50;
+        
+        .question-title { 
+            font-weight: 600; 
+            font-size: 1.1rem; 
+            color: #1e293b; 
+            margin-bottom: 15px; 
+            display: block; 
         }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        
+        .options { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px; 
         }
-        .option-btn {
-            background-color: #ecf0f1;
-            border: 2px solid transparent;
-            padding: 12px 15px;
-            font-size: 1em;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.3s;
-            font-family: inherit;
+        
+        .option-btn { 
+            width: 100%; 
+            text-align: left; 
+            padding: 12px 15px; 
+            background: #f8f9fa; 
+            border: 1px solid #ddd; 
+            border-radius: 6px; 
+            font-size: 1rem; 
+            color: #334155; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            font-family: inherit; 
         }
-        .option-btn:hover:not(:disabled) {
-            background-color: #dcdde1;
-            border-color: #bdc3c7;
+        
+        .option-btn:hover:not(:disabled) { 
+            background: #e2e8f0; 
         }
-        .option-btn:disabled {
-            cursor: not-allowed;
-            color: #333;
+        
+        .option-btn:disabled { 
+            cursor: not-allowed; 
         }
-        .option-btn.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-            color: #155724;
-            font-weight: bold;
+        
+        .option-btn.correct { 
+            background: #dcfce7 !important; 
+            border-color: var(--success) !important; 
+            color: #166534 !important; 
+            font-weight: bold; 
         }
-        .option-btn.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-            color: #721c24;
+        
+        .option-btn.incorrect { 
+            background: #fee2e2 !important; 
+            border-color: var(--error) !important; 
+            color: #991b1b !important; 
         }
-        .explanation {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #e8f4f8;
-            border-left: 4px solid #3498db;
-            border-radius: 4px;
-            font-size: 0.95em;
+        
+        .explanation { 
+            display: none; 
+            margin-top: 15px; 
+            padding: 15px; 
+            background-color: #e0f2fe; 
+            border-left: 4px solid var(--primary); 
+            border-radius: 6px; 
+            font-size: 0.95em; 
+            color: #0369a1; 
         }
-        .explanation strong {
-            color: #2980b9;
+        
+        .explanation strong { 
+            color: #0284c7; 
         }
     </style>
 </head>
 <body>
 
-    <h1>Simulado: Equação Fundamental da Ondulatória</h1>
-    <p class="intro">Analise as questões abaixo, focadas no comportamento das ondas eletromagnéticas e sonoras durante os exames de imagem.</p>
+    <div class="container">
+        <h1>Simulado: Equação Fundamental da Ondulatória</h1>
+        <p class="intro">Analise as questões abaixo, focadas no comportamento das ondas eletromagnéticas e sonoras durante os exames de imagem.</p>
 
-    <div class="question-card">
-        <div class="question-title">1. Na ultrassonografia, o feixe sonoro atravessa diferentes tecidos, como pele, gordura, músculo e osso. O que acontece com a velocidade de propagação (v) dessa onda mecânica ao passar do tecido adiposo para o tecido ósseo?</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) Permanece inalterada, pois a velocidade da onda depende apenas da fonte que a emitiu.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) A velocidade se altera porque a frequência do ultrassom muda automaticamente de acordo com o tecido.</button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) A velocidade se altera, pois a velocidade de propagação de uma onda depende exclusivamente das características físicas do meio em que ela se propaga.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) A velocidade zera, pois o som não consegue atravessar tecidos rígidos como o osso.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) A velocidade diminui independentemente do meio, pois a onda perde energia em forma de calor.</button>
+        <div class="question-card">
+            <div class="question-title">1. Na ultrassonografia, o feixe sonoro atravessa diferentes tecidos, como pele, gordura, músculo e osso. O que acontece com a velocidade de propagação (v) dessa onda mecânica ao passar do tecido adiposo para o tecido ósseo?</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) Permanece inalterada, pois a velocidade da onda depende apenas da fonte que a emitiu.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) A velocidade se altera porque a frequência do ultrassom muda automaticamente de acordo com o tecido.</button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) A velocidade se altera, pois a velocidade de propagação de uma onda depende exclusivamente das características físicas do meio em que ela se propaga.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) A velocidade zera, pois o som não consegue atravessar tecidos rígidos como o osso.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) A velocidade diminui independentemente do meio, pois a onda perde energia em forma de calor.</button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Regra de ouro da ondulatória: A <strong>velocidade</strong> de uma onda só muda se ela mudar de <strong>meio</strong> de propagação (neste caso, da gordura para o osso). No ultrassom, o som viaja muito mais rápido no osso (meio rígido) do que na gordura (meio elástico/mole).
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Regra de ouro da ondulatória: A <strong>velocidade</strong> de uma onda só muda se ela mudar de <strong>meio</strong> de propagação (neste caso, da gordura para o osso). No ultrassom, o som viaja muito mais rápido no osso (meio rígido) do que na gordura (meio elástico/mole).
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">2. Durante a realização de um exame radiográfico de tórax, o tecnólogo percebe que precisa de um feixe de raios X com maior poder de penetração (maior energia). Para que a frequência (f) da onda eletromagnética aumente, o que é estritamente necessário acontecer?</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) A onda deve passar por tecidos mais densos do corpo do paciente.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) O comprimento de onda do feixe deve ser artificialmente alongado pelo colimador.</button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) Devem ser alterados os parâmetros da fonte emissora (neste caso, ajustando o kVp no painel do equipamento).</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) A velocidade da onda deve ser aumentada para superar a velocidade da luz.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) O tempo de exposição (s) deve ser reduzido pela metade.</button>
+        <div class="question-card">
+            <div class="question-title">2. Durante a realização de um exame radiográfico de tórax, o tecnólogo percebe que precisa de um feixe de raios X com maior poder de penetração (maior energia). Para que a frequência (f) da onda eletromagnética aumente, o que é estritamente necessário acontecer?</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) A onda deve passar por tecidos mais densos do corpo do paciente.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) O comprimento de onda do feixe deve ser artificialmente alongado pelo colimador.</button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) Devem ser alterados os parâmetros da fonte emissora (neste caso, ajustando o kVp no painel do equipamento).</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) A velocidade da onda deve ser aumentada para superar a velocidade da luz.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) O tempo de exposição (s) deve ser reduzido pela metade.</button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Outra regra fundamental: A <strong>frequência</strong> de uma onda só se altera quando a <strong>fonte emissora</strong> é alterada. Depois que a onda de raios X sai da ampola, sua frequência não muda ao passar pelo paciente. Para mudar a frequência, o profissional deve mudar o kV (quilovoltagem) no painel, alterando a fonte geradora.
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Outra regra fundamental: A <strong>frequência</strong> de uma onda só se altera quando a <strong>fonte emissora</strong> é alterada. Depois que a onda de raios X sai da ampola, sua frequência não muda ao passar pelo paciente. Para mudar a frequência, o profissional deve mudar o kV (quilovoltagem) no painel, alterando a fonte geradora.
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">3. Ao realizar uma ultrassonografia hepática, o médico troca o transdutor do aparelho de 3 MHz por um de 5 MHz na intenção de obter melhor resolução nas partes superficiais do fígado. O que acontece com a velocidade de propagação do som no fígado com essa mudança de transdutor?</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) Aumenta, pois a frequência agora é maior (5 MHz).</button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">B) Permanece a mesma, pois a velocidade depende apenas do meio (fígado) e não da frequência do transdutor.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) Diminui, pois os transdutores de alta frequência emitem ondas mais lentas para formar imagens mais nítidas.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) A velocidade duplica para compensar o aumento de frequência.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) Torna-se igual à velocidade da luz, mudando a natureza da onda.</button>
+        <div class="question-card">
+            <div class="question-title">3. Ao realizar uma ultrassonografia hepática, o médico troca o transdutor do aparelho de 3 MHz por um de 5 MHz na intenção de obter melhor resolução nas partes superficiais do fígado. O que acontece com a velocidade de propagação do som no fígado com essa mudança de transdutor?</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) Aumenta, pois a frequência agora é maior (5 MHz).</button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">B) Permanece a mesma, pois a velocidade depende apenas do meio (fígado) e não da frequência do transdutor.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) Diminui, pois os transdutores de alta frequência emitem ondas mais lentas para formar imagens mais nítidas.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) A velocidade duplica para compensar o aumento de frequência.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) Torna-se igual à velocidade da luz, mudando a natureza da onda.</button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Essa é uma "pegadinha" clássica que confunde muitos alunos. Mudou a frequência (a fonte), mas o paciente e o órgão (o meio) continuam os mesmos. Como a velocidade só depende do meio, a velocidade da onda sonora dentro do fígado permanece constante (aproximadamente 1540 m/s), independentemente de você usar 3 MHz ou 5 MHz.
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Essa é uma "pegadinha" clássica que confunde muitos alunos. Mudou a frequência (a fonte), mas o paciente e o órgão (o meio) continuam os mesmos. Como a velocidade só depende do meio, a velocidade da onda sonora dentro do fígado permanece constante (aproximadamente 1540 m/s), independentemente de você usar 3 MHz ou 5 MHz.
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">4. Considerando que todos os raios X viajam à velocidade da luz no vácuo (velocidade constante), se ajustarmos a ampola de raios X para produzir um feixe com o DOBRO da frequência original, qual será o efeito no comprimento de onda (&lambda;)?</div>
-        <div class="options">
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">A) O comprimento de onda será reduzido pela metade, pois são inversamente proporcionais.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) O comprimento de onda também dobrará, pois são diretamente proporcionais.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) Permanecerá inalterado, pois depende exclusivamente do ânodo de tungstênio.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) Ficará quatro vezes menor, devido ao efeito do quadrado da distância.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) O comprimento de onda anulará a frequência, dissipando a radiação.</button>
+        <div class="question-card">
+            <div class="question-title">4. Considerando que todos os raios X viajam à velocidade da luz no vácuo (velocidade constante), se ajustarmos a ampola de raios X para produzir um feixe com o DOBRO da frequência original, qual será o efeito no comprimento de onda (&lambda;)?</div>
+            <div class="options">
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">A) O comprimento de onda será reduzido pela metade, pois são inversamente proporcionais.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) O comprimento de onda também dobrará, pois são diretamente proporcionais.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) Permanecerá inalterado, pois depende exclusivamente do ânodo de tungstênio.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) Ficará quatro vezes menor, devido ao efeito do quadrado da distância.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) O comprimento de onda anulará a frequência, dissipando a radiação.</button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Analisando a equação v = &lambda; &middot; f. Se a velocidade "v" não pode mudar (é sempre a velocidade da luz), para manter a igualdade, se a frequência "f" sobe 2x, o comprimento de onda "&lambda;" obrigatoriamente tem que cair pela metade. Eles agem como uma gangorra!
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Analisando a equação v = &lambda; &middot; f. Se a velocidade "v" não pode mudar (é sempre a velocidade da luz), para manter a igualdade, se a frequência "f" sobe 2x, o comprimento de onda "&lambda;" obrigatoriamente tem que cair pela metade. Eles agem como uma gangorra!
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">5. O som (ultrassom) se propaga nos tecidos moles do corpo humano com uma velocidade média constante de 1500 m/s. Se o médico estiver usando um transdutor com frequência de 3 MHz (3.000.000 Hz), qual será o comprimento de onda (&lambda;) gerado no interior desse tecido? <br><br>Dica: &lambda; = v / f</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 0,05 metros (5 cm)</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 500 metros</button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) 0,0005 metros (0,5 milímetros)</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 0,5 metros (50 cm)</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 4500 metros</button>
+        <div class="question-card">
+            <div class="question-title">5. O som (ultrassom) se propaga nos tecidos moles do corpo humano com uma velocidade média constante de 1500 m/s. Se o médico estiver usando um transdutor com frequência de 3 MHz (3.000.000 Hz), qual será o comprimento de onda (&lambda;) gerado no interior desse tecido? <br><br>Dica: &lambda; = v / f</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 0,05 metros (5 cm)</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 500 metros</button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) 0,0005 metros (0,5 milímetros)</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 0,5 metros (50 cm)</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 4500 metros</button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Vamos à matemática! Temos a velocidade v = 1500 m/s e a frequência f = 3.000.000 Hz. Pela fórmula: &lambda; = 1500 / 3.000.000. Cortando os zeros, temos 15 / 30000 = 0,0005 metros. Convertendo para milímetros (multiplicando por 1000), temos 0,5 mm. É por causa desse comprimento de onda minúsculo que conseguimos ver detalhes tão pequenos nos exames de ultrassom!
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Vamos à matemática! Temos a velocidade v = 1500 m/s e a frequência f = 3.000.000 Hz. Pela fórmula: &lambda; = 1500 / 3.000.000. Cortando os zeros, temos 15 / 30000 = 0,0005 metros. Convertendo para milímetros (multiplicando por 1000), temos 0,5 mm. É por causa desse comprimento de onda minúsculo que conseguimos ver detalhes tão pequenos nos exames de ultrassom!
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">6. Em ultrassonografia, o comprimento de onda (&lambda;) define a capacidade de resolução e a profundidade de penetração. Sabendo que a velocidade de propagação (v) é constante no mesmo tipo de tecido mole, se o operador precisar visualizar um órgão mais profundo, ele precisará de uma onda com MAIOR comprimento de onda. Como ele consegue isso manipulando o equipamento?</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) Aumentando a frequência do transdutor.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) Aumentando a velocidade do som no aparelho.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) Mantendo a frequência igual e reduzindo o ganho geral.</button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">D) Escolhendo um transdutor de MENOR frequência.</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) Mudando a temperatura da sala de exames para dilatar o meio.</button>
+        <div class="question-card">
+            <div class="question-title">6. Em ultrassonografia, o comprimento de onda (&lambda;) define a capacidade de resolução e a profundidade de penetração. Sabendo que a velocidade de propagação (v) é constante no mesmo tipo de tecido mole, se o operador precisar visualizar um órgão mais profundo, ele precisará de uma onda com MAIOR comprimento de onda. Como ele consegue isso manipulando o equipamento?</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) Aumentando a frequência do transdutor.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) Aumentando a velocidade do som no aparelho.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) Mantendo a frequência igual e reduzindo o ganho geral.</button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">D) Escolhendo um transdutor de MENOR frequência.</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) Mudando a temperatura da sala de exames para dilatar o meio.</button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Como velocidade (v) é fixa no tecido, frequência (f) e comprimento de onda (&lambda;) são inversos. Para conseguir um MAIOR comprimento de onda (ondas "mais longas" que cansam menos e vão mais fundo), o técnico precisa diminuir a frequência (usar transdutores de 2 ou 3 MHz em vez de 10 MHz).
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Como velocidade (v) é fixa no tecido, frequência (f) e comprimento de onda (&lambda;) são inversos. Para conseguir um MAIOR comprimento de onda (ondas "mais longas" que cansam menos e vão mais fundo), o técnico precisa diminuir a frequência (usar transdutores de 2 ou 3 MHz em vez de 10 MHz).
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">7. Um pulso de radiofrequência utilizado na bobina de um equipamento de Ressonância Magnética opera exatamente com uma frequência de 50 MHz (50.000.000 Hz). Sabendo que o período (T) de uma onda é o tempo de um ciclo completo e que ele é o inverso da frequência (T = 1 / f), qual é o período dessa onda de radiofrequência?</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 2 segundos</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 0,5 segundos</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 0,02 segundos</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 2 microsegundos (2 x 10<sup>-6</sup> s)</button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">E) 0,02 microsegundos (2 x 10<sup>-8</sup> s)</button>
+        <div class="question-card">
+            <div class="question-title">7. Um pulso de radiofrequência utilizado na bobina de um equipamento de Ressonância Magnética opera exatamente com uma frequência de 50 MHz (50.000.000 Hz). Sabendo que o período (T) de uma onda é o tempo de um ciclo completo e que ele é o inverso da frequência (T = 1 / f), qual é o período dessa onda de radiofrequência?</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 2 segundos</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 0,5 segundos</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 0,02 segundos</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 2 microsegundos (2 x 10<sup>-6</sup> s)</button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">E) 0,02 microsegundos (2 x 10<sup>-8</sup> s)</button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Vamos aplicar a fórmula do período: T = 1 / f. Sendo a frequência f = 50.000.000 (ou 5 x 10<sup>7</sup>). Dividindo 1 por 50.000.000 temos 0,00000002 segundos. Em notação científica, isso é igual a 2 x 10<sup>-8</sup> s. Ou seja, é uma oscilação absurdamente rápida, como esperado de pulsos eletromagnéticos!
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Vamos aplicar a fórmula do período: T = 1 / f. Sendo a frequência f = 50.000.000 (ou 5 x 10<sup>7</sup>). Dividindo 1 por 50.000.000 temos 0,00000002 segundos. Em notação científica, isso é igual a 2 x 10<sup>-8</sup> s. Ou seja, é uma oscilação absurdamente rápida, como esperado de pulsos eletromagnéticos!
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">8. A energia transportada por um único fóton de radiação é calculada pela equação de Planck: <strong>E = h &middot; f</strong>, onde <strong>h</strong> é a constante de Planck (h = 6,63 x 10<sup>-34</sup> J&middot;s) e <strong>f</strong> é a frequência da onda. Considere uma onda de rádio com frequência de 1 x 10<sup>8</sup> Hz e um feixe de Raios X com frequência de 1 x 10<sup>18</sup> Hz. Calcule a energia de cada radiação e assinale a alternativa que traz a razão correta entre a energia do Raio X e a energia da onda de rádio (E<sub>RaioX</sub> / E<sub>Rádio</sub>).</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 6,63 x 10<sup>-10</sup></button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">B) 10<sup>10</sup></button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 10<sup>26</sup></button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>-10</sup></button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 6,63 x 10<sup>10</sup></button>
+        <div class="question-card">
+            <div class="question-title">8. A energia transportada por um único fóton de radiação é calculada pela equação de Planck: <strong>E = h &middot; f</strong>, onde <strong>h</strong> é a constante de Planck (h = 6,63 x 10<sup>-34</sup> J&middot;s) e <strong>f</strong> é a frequência da onda. Considere uma onda de rádio com frequência de 1 x 10<sup>8</sup> Hz e um feixe de Raios X com frequência de 1 x 10<sup>18</sup> Hz. Calcule a energia de cada radiação e assinale a alternativa que traz a razão correta entre a energia do Raio X e a energia da onda de rádio (E<sub>RaioX</sub> / E<sub>Rádio</sub>).</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 6,63 x 10<sup>-10</sup></button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">B) 10<sup>10</sup></button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 10<sup>26</sup></button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>-10</sup></button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 6,63 x 10<sup>10</sup></button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Vamos calcular a energia de cada uma!<br>
+                - E<sub>Rádio</sub> = (6,63 x 10<sup>-34</sup>) &middot; (1 x 10<sup>8</sup>) = 6,63 x 10<sup>-26</sup> Joules.<br>
+                - E<sub>RaioX</sub> = (6,63 x 10<sup>-34</sup>) &middot; (1 x 10<sup>18</sup>) = 6,63 x 10<sup>-16</sup> Joules.<br><br>
+                Agora, a razão pedida (E<sub>RaioX</sub> / E<sub>Rádio</sub>):<br>
+                (6,63 x 10<sup>-16</sup>) / (6,63 x 10<sup>-26</sup>).<br>
+                Dividindo os números reais: 6,63 / 6,63 = 1.<br>
+                Dividindo as potências de base 10 (mantemos a base e subtraímos os expoentes): -16 - (-26) = -16 + 26 = 10. O resultado é <strong>10<sup>10</sup></strong>.<br><br>
+                <em>Dica de Ouro:</em> Como a constante (h) é a mesma nas duas equações, a razão das energias será <strong>exatamente igual</strong> à razão das frequências! O Raio X carrega dez bilhões de vezes mais energia por fóton, o que explica sua incrível capacidade de ionização em relação à onda de rádio.
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Vamos calcular a energia de cada uma!<br>
-            - E<sub>Rádio</sub> = (6,63 x 10<sup>-34</sup>) &middot; (1 x 10<sup>8</sup>) = 6,63 x 10<sup>-26</sup> Joules.<br>
-            - E<sub>RaioX</sub> = (6,63 x 10<sup>-34</sup>) &middot; (1 x 10<sup>18</sup>) = 6,63 x 10<sup>-16</sup> Joules.<br><br>
-            Agora, a razão pedida (E<sub>RaioX</sub> / E<sub>Rádio</sub>):<br>
-            (6,63 x 10<sup>-16</sup>) / (6,63 x 10<sup>-26</sup>).<br>
-            Dividindo os números reais: 6,63 / 6,63 = 1.<br>
-            Dividindo as potências de base 10 (mantemos a base e subtraímos os expoentes): -16 - (-26) = -16 + 26 = 10. O resultado é <strong>10<sup>10</sup></strong>.<br><br>
-            <em>Dica de Ouro:</em> Como a constante (h) é a mesma nas duas equações, a razão das energias será <strong>exatamente igual</strong> à razão das frequências! O Raio X carrega dez bilhões de vezes mais energia por fóton, o que explica sua incrível capacidade de ionização em relação à onda de rádio.
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">9. Considere uma onda de rádio com comprimento de onda (&lambda;) de 300 cm e um feixe de Raios X com comprimento de onda de 0,3 nm (nanômetros). Sabendo que ambas se propagam no vácuo com uma velocidade (c) de 300.000 km/s, calcule a frequência de cada uma (em Hertz) e assinale a alternativa que representa corretamente a razão entre a frequência do Raio X e a frequência da onda de rádio (f<sub>RaioX</sub> / f<sub>Rádio</sub>).</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 10<sup>18</sup></button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 10<sup>8</sup></button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) 10<sup>10</sup></button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>-10</sup></button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 10<sup>12</sup></button>
+        <div class="question-card">
+            <div class="question-title">9. Considere uma onda de rádio com comprimento de onda (&lambda;) de 300 cm e um feixe de Raios X com comprimento de onda de 0,3 nm (nanômetros). Sabendo que ambas se propagam no vácuo com uma velocidade (c) de 300.000 km/s, calcule a frequência de cada uma (em Hertz) e assinale a alternativa que representa corretamente a razão entre a frequência do Raio X e a frequência da onda de rádio (f<sub>RaioX</sub> / f<sub>Rádio</sub>).</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 10<sup>18</sup></button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 10<sup>8</sup></button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">C) 10<sup>10</sup></button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 10<sup>-10</sup></button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">E) 10<sup>12</sup></button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Primeiro, padronizamos as unidades para o Sistema Internacional (metros e segundos):<br>
+                - Velocidade (c): 300.000 km/s = 3 x 10<sup>8</sup> m/s<br>
+                - &lambda; do Rádio: 300 cm = 3 metros<br>
+                - &lambda; do Raio X: 0,3 nm = 0,3 x 10<sup>-9</sup> m = 3 x 10<sup>-10</sup> metros.<br><br>
+                Calculando as frequências (f = v / &lambda;):<br>
+                - f<sub>Rádio</sub> = (3 x 10<sup>8</sup>) / 3 = 1 x 10<sup>8</sup> Hz.<br>
+                - f<sub>RaioX</sub> = (3 x 10<sup>8</sup>) / (3 x 10<sup>-10</sup>) = 1 x 10<sup>18</sup> Hz.<br><br>
+                Razão pedida: (1 x 10<sup>18</sup>) / (1 x 10<sup>8</sup>). Conservamos a base 10 e subtraímos os expoentes: 18 - 8 = 10. O resultado é <strong>10<sup>10</sup></strong>. O Raio X oscila dez bilhões de vezes a mais por segundo que a onda de rádio!
+            </div>
         </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Primeiro, padronizamos as unidades para o Sistema Internacional (metros e segundos):<br>
-            - Velocidade (c): 300.000 km/s = 3 x 10<sup>8</sup> m/s<br>
-            - &lambda; do Rádio: 300 cm = 3 metros<br>
-            - &lambda; do Raio X: 0,3 nm = 0,3 x 10<sup>-9</sup> m = 3 x 10<sup>-10</sup> metros.<br><br>
-            Calculando as frequências (f = v / &lambda;):<br>
-            - f<sub>Rádio</sub> = (3 x 10<sup>8</sup>) / 3 = 1 x 10<sup>8</sup> Hz.<br>
-            - f<sub>RaioX</sub> = (3 x 10<sup>8</sup>) / (3 x 10<sup>-10</sup>) = 1 x 10<sup>18</sup> Hz.<br><br>
-            Razão pedida: (1 x 10<sup>18</sup>) / (1 x 10<sup>8</sup>). Conservamos a base 10 e subtraímos os expoentes: 18 - 8 = 10. O resultado é <strong>10<sup>10</sup></strong>. O Raio X oscila dez bilhões de vezes a mais por segundo que a onda de rádio!
-        </div>
-    </div>
 
-    <div class="question-card">
-        <div class="question-title">10. Um equipamento moderno de radiologia digital gera um feixe de raios X com uma frequência (f) de 3 x 10<sup>18</sup> Hz. Sabendo que essa onda eletromagnética viaja no vácuo interno da ampola à velocidade da luz (v = c = 3 x 10<sup>8</sup> m/s), calcule o comprimento de onda (&lambda;) desse feixe em metros.</div>
-        <div class="options">
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 1 x 10<sup>10</sup> m</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 3 x 10<sup>-8</sup> m</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 9 x 10<sup>26</sup> m</button>
-            <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 1 x 10<sup>-8</sup> m</button>
-            <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">E) 1 x 10<sup>-10</sup> m</button>
-        </div>
-        <div class="explanation">
-            <strong>Explicação Didática:</strong> Para achar o comprimento de onda, usamos &lambda; = v / f. Neste caso, &lambda; = (3 x 10<sup>8</sup>) / (3 x 10<sup>18</sup>). Dividindo 3 por 3, temos 1. Na divisão de potências de mesma base, mantemos a base (10) e subtraímos os expoentes: 8 - 18 = -10. Resultado: 1 x 10<sup>-10</sup> metros (o equivalente a 1 Angstrom, o tamanho típico de uma onda de Raio X, tão pequena que passa por entre os átomos do nosso corpo!).
+        <div class="question-card">
+            <div class="question-title">10. Um equipamento moderno de radiologia digital gera um feixe de raios X com uma frequência (f) de 3 x 10<sup>18</sup> Hz. Sabendo que essa onda eletromagnética viaja no vácuo interno da ampola à velocidade da luz (v = c = 3 x 10<sup>8</sup> m/s), calcule o comprimento de onda (&lambda;) desse feixe em metros.</div>
+            <div class="options">
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">A) 1 x 10<sup>10</sup> m</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">B) 3 x 10<sup>-8</sup> m</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">C) 9 x 10<sup>26</sup> m</button>
+                <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">D) 1 x 10<sup>-8</sup> m</button>
+                <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">E) 1 x 10<sup>-10</sup> m</button>
+            </div>
+            <div class="explanation">
+                <strong>Explicação Didática:</strong> Para achar o comprimento de onda, usamos &lambda; = v / f. Neste caso, &lambda; = (3 x 10<sup>8</sup>) / (3 x 10<sup>18</sup>). Dividindo 3 por 3, temos 1. Na divisão de potências de mesma base, mantemos a base (10) e subtraímos os expoentes: 8 - 18 = -10. Resultado: 1 x 10<sup>-10</sup> metros (o equivalente a 1 Angstrom, o tamanho típico de uma onda de Raio X, tão pequena que passa por entre os átomos do nosso corpo!).
+            </div>
         </div>
     </div>
 
