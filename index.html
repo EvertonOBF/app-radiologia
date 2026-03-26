@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Física na Radiologia</title>
+    <title>Portal - Física na Radiologia</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Radiologia">
+    <meta name="apple-mobile-web-app-title" content="Portal Radiologia">
 
     <style>
         body {
@@ -15,73 +15,116 @@
             background-color: #f4f7f6;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            align-items: center;
             min-height: 100vh;
-            margin: 0 auto;
-            max-width: 800px;
-            padding: 40px 20px;
+            margin: 0;
+            padding: 50px 20px;
             color: #444444;
+            box-sizing: border-box;
         }
+
+        .header {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
         h1 { 
             color: #2c3e50; 
             margin-bottom: 10px; 
-            text-align: justify; 
-            font-weight: normal;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            width: 100%;
+            font-weight: 600;
         }
-        p { 
-            color: #555555; 
-            margin-bottom: 40px; 
-            text-align: justify; 
+
+        p.subtitle { 
+            color: #7f8c8d; 
             font-size: 1.1em;
+            margin-top: 0;
         }
-        .menu-container {
+
+        /* Container em Grid para os botões/cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Estilo base dos Cards */
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333333;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-top: 6px solid #3498db; /* Destaque azul no topo */
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            width: 100%;
+            justify-content: center;
         }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 20px;
-            background-color: #ffffff;
-            color: #444444;
-            text-decoration: none;
-            font-size: 1.1rem;
-            border: 1px solid #e0e0e0;
-            border-left: 6px solid #3498db;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            text-align: justify;
-            box-sizing: border-box;
-        }
-        .btn:hover {
-            background-color: #f8fafc;
-            border-left-color: #2980b9;
-            transform: translateX(5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
             color: #2c3e50;
         }
-        .btn:active { 
-            transform: scale(0.98); 
+
+        .card p {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.95rem;
         }
+
+        /* Efeito ao passar o mouse (Apenas para cards ativos) */
+        .card.active:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-top-color: #2980b9;
+        }
+
+        .card.active:active {
+            transform: scale(0.98);
+        }
+
+        /* Estilo para as etapas em desenvolvimento */
+        .card.disabled {
+            border-top-color: #bdc3c7;
+            cursor: not-allowed;
+            background-color: #fafafa;
+        }
+
+        .card.disabled h2 {
+            color: #95a5a6;
+        }
+
     </style>
 </head>
 <body>
 
-    <h1>Física na Radiologia</h1>
-    <p>Selecione abaixo o módulo de estudos desejado para iniciar a sua revisão:</p>
+    <div class="header">
+        <h1>Física - Radiologia</h1>
+        <p class="subtitle">Bem-vindo ao portal de estudos. Selecione a etapa desejada:</p>
+    </div>
 
-    <div class="menu-container">
-        <a href="notacao_cientifica.htm" class="btn">Notação e Grandezas</a>
-        <a href="Conceitos_iniciais.htm" class="btn">Conceitos Iniciais</a>
-        <a href="ondulatoria_aplicada.htm" class="btn">Ondulatória Aplicada</a>
-        <a href="equacao_fundamental.htm" class="btn">Equação da Onda</a> 
-        <a href="trabalho1.htm" class="btn">Trabalho NP1</a>
+    <div class="cards-container">
+        <a href="etapa1/etapa1.html" class="card active">
+            <h2>1ª Etapa</h2>
+            <p>Conceitos Iniciais e Ondulatória</p>
+        </a>
+
+        <a href="#" class="card disabled">
+            <h2>2ª Etapa</h2>
+            <p>Em desenvolvimento...</p>
+        </a>
+
+        <a href="#" class="card disabled">
+            <h2>3ª Etapa</h2>
+            <p>Em desenvolvimento...</p>
+        </a>
     </div>
     
 </body>
