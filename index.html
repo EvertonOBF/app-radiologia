@@ -18,7 +18,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 50px 20px;
+            padding: 50px 20px 20px 20px; /* Ajustei o padding inferior */
             color: #444444;
             box-sizing: border-box;
         }
@@ -42,7 +42,6 @@
             margin-top: 0;
         }
 
-        /* Container em Grid para os botões/cards */
         .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -51,7 +50,6 @@
             max-width: 900px;
         }
 
-        /* Estilo base dos Cards */
         .card {
             background-color: #ffffff;
             border-radius: 12px;
@@ -61,7 +59,7 @@
             color: #333333;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
-            border-top: 6px solid #3498db; /* Destaque azul no topo */
+            border-top: 6px solid #3498db;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -79,7 +77,6 @@
             font-size: 0.95rem;
         }
 
-        /* Efeito ao passar o mouse (Apenas para cards ativos) */
         .card.active:hover {
             transform: translateY(-8px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -90,7 +87,6 @@
             transform: scale(0.98);
         }
 
-        /* Estilo para as etapas em desenvolvimento */
         .card.disabled {
             border-top-color: #bdc3c7;
             cursor: not-allowed;
@@ -127,5 +123,9 @@
         </a>
     </div>
     
+    <footer style="margin-top: auto; padding-top: 40px; text-align: center; color: #95a5a6; font-size: 0.85em; width: 100%;">
+        <p>&copy; 2026 - Física - Radiologia | Desenvolvido por Everton Castro</p>
+    </footer>
+
 </body>
 </html>
