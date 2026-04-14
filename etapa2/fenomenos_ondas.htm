@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identificador de Fenômenos - Radiologia</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 4px solid #e67e22; padding-bottom: 10px; }
+        .instruction { background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin-bottom: 25px; font-size: 0.9em; }
+        .card { background: #ffffff; border: 2px solid #eaeeef; border-radius: 10px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
+        .card:hover { border-color: #e67e22; }
+        .scenario { font-style: italic; color: #34495e; margin-bottom: 15px; display: block; background: #f9f9f9; padding: 10px; border-radius: 5px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .opt-btn { background: #fff; border: 1px solid #dcdde1; padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: 0.2s; }
+        .opt-btn:hover { background: #e67e22; color: white; }
+        .correct { background-color: #2ecc71 !important; color: white !important; font-weight: bold; }
+        .incorrect { background-color: #e74c3c !important; color: white !important; }
+        .feedback { display: none; margin-top: 15px; padding: 10px; border-radius: 5px; background: #d1ecf1; color: #0c5460; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Desafio: Identifique o Fenômeno</h1>
+    <div class="instruction">
+        <strong>Missão:</strong> Leia a situação técnica abaixo e clique no fenômeno ondulatório que melhor a descreve.
+    </div>
+
+    <div id="quiz-container">
+        <div class="card" id="q1">
+            <strong>Situação:</strong> <span class="scenario">No Ultrassom, a onda sonora atinge a superfície de um cálculo renal (pedra) e retorna ao transdutor para formar a imagem da face anterior desse cálculo.</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Reflexão', 'q1')">Reflexão</button>
+                <button class="opt-btn" onclick="check(this, 'Refração', 'q1')">Refração</button>
+                <button class="opt-btn" onclick="check(this, 'Difração', 'q1')">Difração</button>
+                <button class="opt-btn" onclick="check(this, 'Polarização', 'q1')">Polarização</button>
+            </div>
+            <div class="feedback" id="f-q1"><strong>Resposta: Reflexão.</strong> Sempre que a onda "bate e volta" ao encontrar uma interface, estamos falando de reflexão. É a base da formação de imagem no Ultrassom.</div>
+        </div>
+
+        <div class="card" id="q2">
+            <strong>Situação:</strong> <span class="scenario">Um técnico observa que o fluxo de sangue de uma artéria produz um som com frequência diferente dependendo se o sangue se afasta ou se aproxima da sonda.</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Efeito Doppler', 'q2')">Efeito Doppler</button>
+                <button class="opt-btn" onclick="check(this, 'Ressonância', 'q2')">Ressonância</button>
+                <button class="opt-btn" onclick="check(this, 'Interferência', 'q2')">Interferência</button>
+                <button class="opt-btn" onclick="check(this, 'Difração', 'q2')">Difração</button>
+            </div>
+            <div class="feedback" id="f-q2"><strong>Resposta: Efeito Doppler.</strong> Mudança na percepção da frequência devido ao movimento relativo entre fonte (sangue) e observador (sonda).</div>
+        </div>
+
+        <div class="card" id="q3">
+            <strong>Situação:</strong> <span class="scenario">Para obter o sinal na Ressonância Magnética, enviamos ondas de rádio exatamente na mesma frequência de rotação dos prótons de hidrogênio do paciente.</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Refração', 'q3')">Refração</button>
+                <button class="opt-btn" onclick="check(this, 'Ressonância', 'q3')">Ressonância</button>
+                <button class="opt-btn" onclick="check(this, 'Polarização', 'q3')">Polarização</button>
+                <button class="opt-btn" onclick="check(this, 'Reflexão', 'q3')">Reflexão</button>
+            </div>
+            <div class="feedback" id="f-q3"><strong>Resposta: Ressonância.</strong> É o fenômeno de transferência de energia entre dois sistemas que vibram na mesma frequência.</div>
+        </div>
+
+        <div class="card" id="q4">
+            <strong>Situação:</strong> <span class="scenario">O feixe de Raios X sofre um leve desvio em sua trajetória ao passar pelas bordas de um colimador metálico muito estreito.</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Polarização', 'q4')">Polarização</button>
+                <button class="opt-btn" onclick="check(this, 'Difração', 'q4')">Difração</button>
+                <button class="opt-btn" onclick="check(this, 'Interferência', 'q4')">Interferência</button>
+                <button class="opt-btn" onclick="check(this, 'Refração', 'q4')">Refração</button>
+            </div>
+            <div class="feedback" id="f-q4"><strong>Resposta: Difração.</strong> É a capacidade da onda de contornar obstáculos ou fendas.</div>
+        </div>
+
+        <div class="card" id="q5">
+            <strong>Situação:</strong> <span class="scenario">Ao atravessar a pele para o tecido adiposo, a onda do Ultrassom muda sua velocidade e sofre um pequeno desvio angular, podendo gerar um erro na localização exata de uma estrutura.</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Reflexão', 'q5')">Reflexão</button>
+                <button class="opt-btn" onclick="check(this, 'Refração', 'q5')">Refração</button>
+                <button class="opt-btn" onclick="check(this, 'Difração', 'q5')">Difração</button>
+                <button class="opt-btn" onclick="check(this, 'Efeito Doppler', 'q5')">Efeito Doppler</button>
+            </div>
+            <div class="feedback" id="f-q5"><strong>Resposta: Refração.</strong> A mudança de velocidade ao mudar de meio (pele para gordura) causa o desvio da onda.</div>
+        </div>
+
+        <div class="card" id="q6">
+            <strong>Situação:</strong> <span class="scenario">Em um monitor de cristal líquido (LCD) da estação de trabalho, a luz é filtrada para vibrar em apenas um plano para reduzir o brilho e melhorar o contraste.</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Polarização', 'q6')">Polarização</button>
+                <button class="opt-btn" onclick="check(this, 'Ressonância', 'q6')">Ressonância</button>
+                <button class="opt-btn" onclick="check(this, 'Interferência', 'q6')">Interferência</button>
+                <button class="opt-btn" onclick="check(this, 'Refração', 'q6')">Refração</button>
+            </div>
+            <div class="feedback" id="f-q6"><strong>Resposta: Polarização.</strong> Filtrar a direção de vibração de uma onda transversal.</div>
+        </div>
+
+        <div class="card" id="q7">
+            <strong>Situação:</strong> <span class="scenario">No processamento da imagem, duas ondas de sinal eletrônico se encontram. Se as cristas de ambas coincidirem, o sinal final fica mais forte (mais brilhante).</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Difração', 'q7')">Difração</button>
+                <button class="opt-btn" onclick="check(this, 'Interferência', 'q7')">Interferência</button>
+                <button class="opt-btn" onclick="check(this, 'Efeito Doppler', 'q7')">Efeito Doppler</button>
+                <button class="opt-btn" onclick="check(this, 'Reflexão', 'q7')">Reflexão</button>
+            </div>
+            <div class="feedback" id="f-q7"><strong>Resposta: Interferência.</strong> No caso, uma interferência construtiva (soma das ondas).</div>
+        </div>
+
+        <div class="card" id="q8">
+            <strong>Situação:</strong> <span class="scenario">As ondas de rádio utilizadas na comunicação da equipe dentro do hospital "fazem a curva" nos corredores, permitindo a audição mesmo sem linha de visão direta.</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Ressonância', 'q8')">Ressonância</button>
+                <button class="opt-btn" onclick="check(this, 'Difração', 'q8')">Difração</button>
+                <button class="opt-btn" onclick="check(this, 'Polarização', 'q8')">Polarização</button>
+                <button class="opt-btn" onclick="check(this, 'Refração', 'q8')">Refração</button>
+            </div>
+            <div class="feedback" id="f-q8"><strong>Resposta: Difração.</strong> Novamente, a capacidade da onda de contornar obstáculos (corredores/portas).</div>
+        </div>
+
+        <div class="card" id="q9">
+            <strong>Situação:</strong> <span class="scenario">Um transdutor de Ultrassom capta o eco que retorna após a onda sonora atingir o fígado. Esse "eco" é o resultado direto de qual fenômeno?</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Reflexão', 'q9')">Reflexão</button>
+                <button class="opt-btn" onclick="check(this, 'Refração', 'q9')">Refração</button>
+                <button class="opt-btn" onclick="check(this, 'Ressonância', 'q9')">Ressonância</button>
+                <button class="opt-btn" onclick="check(this, 'Interferência', 'q9')">Interferência</button>
+            </div>
+            <div class="feedback" id="f-q9"><strong>Resposta: Reflexão.</strong> O eco é, por definição, uma onda sonora refletida.</div>
+        </div>
+
+        <div class="card" id="q10">
+            <strong>Situação:</strong> <span class="scenario">Ao ajustar o 'ganho' em um equipamento, o técnico está lidando com a amplitude da onda. Se duas ondas de ruído se cancelam mutuamente, ocorreu:</span>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="check(this, 'Interferência', 'q10')">Interferência</button>
+                <button class="opt-btn" onclick="check(this, 'Efeito Doppler', 'q10')">Efeito Doppler</button>
+                <button class="opt-btn" onclick="check(this, 'Polarização', 'q10')">Polarização</button>
+                <button class="opt-btn" onclick="check(this, 'Reflexão', 'q10')">Reflexão</button>
+            </div>
+            <div class="feedback" id="f-q10"><strong>Resposta: Interferência.</strong> Neste caso, uma interferência destrutiva (anulação).</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function check(btn, correctLabel, qId) {
+        const card = document.getElementById(qId);
+        const buttons = card.querySelectorAll('.opt-btn');
+        const feedback = document.getElementById('f-' + qId);
+        
+        buttons.forEach(b => b.style.pointerEvents = 'none');
+
+        if (btn.innerText === correctLabel) {
+            btn.classList.add('correct');
+        } else {
+            btn.classList.add('incorrect');
+            buttons.forEach(b => {
+                if(b.innerText === correctLabel) b.classList.add('correct');
+            });
+        }
+        feedback.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
