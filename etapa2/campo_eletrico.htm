@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Radiologia: O Campo Elétrico</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #e9ecef; color: #212529; padding: 20px; }
+        .quiz-container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: #0056b3; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #6c757d; margin-bottom: 30px; }
+        .question { margin-bottom: 25px; padding: 20px; border-left: 5px solid #dee2e6; background: #f8f9fa; border-radius: 5px; }
+        .options { margin-top: 10px; }
+        .option { display: block; padding: 12px; margin: 5px 0; border: 1px solid #ced4da; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .option:hover { background: #e2e6ea; }
+        .correct { background-color: #28a745 !important; color: white; border-color: #1e7e34; }
+        .incorrect { background-color: #dc3545 !important; color: white; border-color: #bd2130; }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background: #e7f3ff; border-radius: 5px; font-size: 0.9em; line-height: 1.4; border-left: 4px solid #0056b3; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Especialista em Radiologia</h1>
+    <p class="subtitle">Simulado 02: Campo Elétrico e Interações à Distância</p>
+
+    <div id="quiz"></div>
+
+    <button onclick="window.location.reload()" style="width:100%; padding:15px; background:#0056b3; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold; margin-top:20px;">RECOMEÇAR SIMULADO</button>
+</div>
+
+<script>
+const myQuestions = [
+    {
+        q: "Por que uma carga elétrica 'sente' a presença de outra mesmo sem haver contato físico entre elas?",
+        options: ["A) Devido ao vácuo absoluto entre elas.", "B) Porque a carga cria uma modificação no espaço chamada Campo Elétrico.", "C) Devido à pressão atmosférica.", "D) Por causa da gravidade da Terra.", "E) Porque os elétrons saltam de uma carga para outra instantaneamente."],
+        correct: 1,
+        exp: "A interação à distância só ocorre porque a carga geradora modifica as propriedades físicas do espaço ao seu redor através do campo elétrico."
+    },
+    {
+        q: "A expressão matemática que define o campo elétrico (E) em relação à força (F) e à carga de prova (q) é:",
+        options: ["A) E = F . q", "B) E = F / q", "C) E = q / F", "D) E = F + q", "E) E = F² / q"],
+        correct: 1,
+        exp: "O campo elétrico é definido como a força por unidade de carga (E = F/q). Ele indica quanta força será aplicada para cada Coulomb de carga colocado naquele ponto."
+    },
+    {
+        q: "No Sistema Internacional, quais as unidades de medida para Campo Elétrico e Força Elétrica, respectivamente?",
+        options: ["A) Coulomb (C) e Newton (N)", "B) Newton/Coulomb (N/C) e Newton (N)", "C) Volt (V) e Joule (J)", "D) Ampere (A) e Newton (N)", "E) Newton (N) e Newton/Coulomb (N/C)"],
+        correct: 1,
+        exp: "Campo Elétrico é medido em N/C (ou V/m) e Força é sempre medida em Newton (N)."
+    },
+    {
+        q: "Ao comparar o Campo Elétrico com o Campo Gravitacional, podemos dizer que a 'Carga Elétrica' (q) desempenha papel análogo ao de qual grandeza na gravidade?",
+        options: ["A) Distância", "B) Tempo", "C) Massa", "D) Volume", "E) Velocidade"],
+        correct: 2,
+        exp: "Assim como a massa é a propriedade que sofre a ação do campo gravitacional (F = m.g), a carga é a propriedade que sofre a ação do campo elétrico (F = q.E)."
+    },
+    {
+        q: "Sobre a natureza do Campo Elétrico, é correto afirmar que se trata de uma grandeza:",
+        options: ["A) Escalar, pois só importa seu valor numérico.", "B) Química, pois depende da reação dos átomos.", "C) Vetorial, pois possui módulo, direção e sentido.", "D) Imaginária, usada apenas para cálculos teóricos.", "E) Estática, que nunca se altera."],
+        correct: 2,
+        exp: "Campos elétricos são vetores. Para entender o movimento de um elétron no tubo de raios X, precisamos saber não só a força, mas para onde ela aponta."
+    },
+    {
+        q: "Uma carga puntiforme NEGATIVA gera um campo elétrico cujas linhas de força são:",
+        options: ["A) Radiais e saindo da carga.", "B) Circulares ao redor da carga.", "C) Radiais e entrando na carga.", "D) Paralelas e horizontais.", "E) Inexistentes, pois cargas negativas não geram campo."],
+        correct: 2,
+        exp: "Por convenção, as linhas de campo 'entram' nas cargas negativas e 'saem' das cargas positivas."
+    },
+    {
+        q: "Em uma 'Gaiola de Faraday', se um técnico estiver dentro de uma estrutura metálica fechada sob forte tempestade elétrica, o campo elétrico em seu interior será:",
+        options: ["A) Igual ao campo externo.", "B) Infinito.", "C) Zero.", "D) Metade do campo externo.", "E) Dependente da altura da gaiola."],
+        correct: 2,
+        exp: "O excesso de cargas se distribui na superfície externa do condutor, anulando o campo elétrico interno (equilíbrio eletrostático)."
+    },
+    {
+        q: "A intensidade do campo elétrico de uma carga puntiforme em um ponto P é inversamente proporcional a:",
+        options: ["A) Carga geradora.", "B) Massa da carga.", "C) Quadrado da distância até o ponto P.", "D) Constante eletrostática.", "E) Velocidade da luz."],
+        correct: 2,
+        exp: "E = K.Q / d². Assim como na radiação, se você dobra a distância, a intensidade do campo cai para 1/4 (quadrado da distância)."
+    },
+    {
+        q: "Se uma carga positiva for colocada em um campo elétrico que aponta para a direita, a força elétrica sobre ela terá:",
+        options: ["A) Sentido para a esquerda.", "B) Sentido para a direita (mesmo do campo).", "C) Sentido para cima.", "D) Força nula.", "E) Movimento circular."],
+        correct: 1,
+        exp: "Em cargas POSITIVAS, a força e o campo têm o mesmo sentido. Em cargas NEGATIVAS (como elétrons), a força é oposta ao sentido do campo."
+    },
+    {
+        q: "O campo elétrico entre duas barras metálicas planas e paralelas, carregadas com cargas de sinais opostos, é classificado como:",
+        options: ["A) Campo Nulo.", "B) Campo Divergente.", "C) Campo Uniforme.", "D) Campo Gravitacional.", "E) Campo Aleatório."],
+        correct: 2,
+        exp: "Entre placas paralelas, o campo possui a mesma intensidade, direção e sentido em quase todos os pontos internos, sendo chamado de Campo Uniforme."
+    }
+];
+
+function buildQuiz() {
+    const output = [];
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+        const options = [];
+        for(let letter in currentQuestion.options){
+            options.push(
+                `<div class="option" onclick="checkAnswer(this, ${questionNumber}, ${letter})">
+                    ${currentQuestion.options[letter]}
+                </div>`
+            );
+        }
+        output.push(
+            `<div class="question">
+                <div class="question-text"><strong>${questionNumber + 1}.</strong> ${currentQuestion.q}</div>
+                <div class="options">${options.join('')}</div>
+                <div id="explanation-${questionNumber}" class="explanation">
+                    <strong>Resposta Correta: ${currentQuestion.options[currentQuestion.correct]}</strong><br>
+                    ${currentQuestion.exp}
+                </div>
+            </div>`
+        );
+    });
+    document.getElementById('quiz').innerHTML = output.join('');
+}
+
+function checkAnswer(selectedElement, questionNumber, optionIndex) {
+    const correctIndex = myQuestions[questionNumber].correct;
+    const explanationDiv = document.getElementById(`explanation-${questionNumber}`);
+    const parent = selectedElement.parentNode;
+    
+    // Bloquear cliques múltiplos
+    const allOptions = parent.querySelectorAll('.option');
+    allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+
+    if(optionIndex === correctIndex) {
+        selectedElement.classList.add('correct');
+    } else {
+        selectedElement.classList.add('incorrect');
+        allOptions[correctIndex].classList.add('correct');
+    }
+    explanationDiv.style.display = 'block';
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

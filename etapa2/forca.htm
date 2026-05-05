@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Radiologia: Lei de Coulomb</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { margin-bottom: 30px; padding: 20px; border: 1px solid #e1e4e8; border-radius: 8px; }
+        .question-text { font-weight: bold; margin-bottom: 15px; color: #2c3e50; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { padding: 12px; border: 2px solid #dfe4ea; border-radius: 6px; cursor: pointer; transition: all 0.3s; background: #fff; }
+        .option:hover { background-color: #f1f2f6; border-color: #3498db; }
+        .correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; }
+        .incorrect { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #e8f4fd; border-left: 5px solid #3498db; border-radius: 4px; font-size: 0.95em; }
+        .btn-reset { display: block; width: 100%; padding: 15px; background: #3498db; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        .btn-reset:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Simulado: Eletrostática e Lei de Coulomb</h1>
+    <p style="text-align: center; color: #666;">Foco: Cargas Elétricas, Força e Distância</p>
+
+    <div id="quiz"></div>
+
+    <button class="btn-reset" onclick="window.location.reload()">Reiniciar Simulado</button>
+</div>
+
+<script>
+const questions = [
+    {
+        q: "Qual é a unidade de medida de carga elétrica no Sistema Internacional (SI), fundamental para o estudo da interação entre partículas no tubo de raios X?",
+        options: ["A) Volt (V)", "B) Ampere (A)", "C) Coulomb (C)", "D) Ohm (Ω)", "E) Joule (J)"],
+        correct: 2,
+        explain: "O Coulomb (C) é a unidade de carga elétrica. Na radiologia, frequentemente usamos submúltiplos, como o mAs (miliampere-segundo), que é uma unidade de carga total que atravessa o tubo."
+    },
+    {
+        q: "Um corpo é considerado eletricamente neutro quando:",
+        options: ["A) Não possui nenhuma carga (prótons ou elétrons) em sua estrutura.", "B) O número de prótons é exatamente igual ao número de elétrons.", "C) Possui apenas nêutrons em seu núcleo.", "D) O número de elétrons é maior que o de prótons.", "E) Está isolado de qualquer campo magnético."],
+        correct: 1,
+        explain: "A neutralidade elétrica ocorre pelo equilíbrio: a carga positiva dos prótons anula a carga negativa dos elétrons. Não significa ausência de partículas, mas sim igualdade de quantidades."
+    },
+    {
+        q: "De acordo com a Lei de Coulomb, a força de atração ou repulsão entre duas cargas elétricas é:",
+        options: ["A) Diretamente proporcional ao quadrado da distância.", "B) Inversamente proporcional ao produto das cargas.", "C) Independente da distância entre elas.", "D) Diretamente proporcional ao produto das cargas.", "E) Inversamente proporcional à constante eletrostática."],
+        correct: 3,
+        explain: "A força é diretamente proporcional ao produto das cargas (Q1 x Q2). Quanto maiores as cargas, maior a força de interação entre elas."
+    },
+    {
+        q: "Se a distância entre duas cargas elétricas for duplicada (2x), o que acontece com a força eletrostática entre elas?",
+        options: ["A) A força dobra.", "B) A força é reduzida à metade.", "C) A força é reduzida a um quarto (1/4).", "D) A força quadruplica.", "E) A força permanece constante."],
+        correct: 2,
+        explain: "A força é inversamente proporcional ao QUADRADO da distância. Se a distância aumenta 2 vezes, a força diminui 2² = 4 vezes."
+    },
+    {
+        q: "Dois corpos com cargas de sinais opostos (um positivo e um negativo):",
+        options: ["A) Se repelem.", "B) Se atraem.", "C) Não interagem.", "D) Anulam seus campos gravitacionais.", "E) Tornam-se neutros instantaneamente à distância."],
+        correct: 1,
+        explain: "Cargas de sinais opostos se atraem; cargas de sinais iguais se repelem. É o princípio fundamental da eletrostática."
+    },
+    {
+        q: "Sobre um corpo carregado negativamente, podemos afirmar que:",
+        options: ["A) Ele ganhou prótons.", "B) Ele perdeu nêutrons.", "C) Ele ganhou elétrons.", "D) Ele perdeu prótons.", "E) Ele possui apenas elétrons e nenhum próton."],
+        correct: 2,
+        explain: "A eletrização ocorre pela movimentação de elétrons. Um corpo fica negativo quando recebe elétrons (excesso de carga negativa)."
+    },
+    {
+        q: "A constante eletrostática (K) no vácuo depende de qual fator?",
+        options: ["A) Da massa das cargas.", "B) Do meio onde as cargas estão inseridas.", "C) Apenas do valor das cargas.", "D) Do tempo de exposição à radiação.", "E) Da velocidade das cargas."],
+        correct: 1,
+        explain: "A constante K depende do meio (vácuo, ar, água, etc.). No vácuo, ela assume seu valor máximo de aproximadamente 9 x 10⁹ N.m²/C²."
+    },
+    {
+        q: "Na Lei de Coulomb, se triplicarmos o valor de uma das cargas, mantendo a outra e a distância constantes, a força original será:",
+        options: ["A) Dividida por 3.", "B) Multiplicada por 9.", "C) Multiplicada por 3.", "D) Reduzida à nona parte.", "E) Mantida a mesma."],
+        correct: 2,
+        explain: "Como a força é diretamente proporcional ao produto das cargas, se uma carga triplica, a força resultante também triplica."
+    },
+    {
+        q: "Considere as afirmações:\nI. A força elétrica pode ser de atração ou repulsão.\nII. A força gravitacional é sempre de atração.\nIII. Ambas dependem do inverso do quadrado da distância.\n\nEstá correto o que se afirma em:",
+        options: ["A) Apenas I.", "B) Apenas II.", "C) I e II apenas.", "D) II e III apenas.", "E) I, II e III."],
+        correct: 4,
+        explain: "Todas estão corretas. A estrutura matemática da Lei de Coulomb é muito similar à Lei da Gravitação Universal de Newton, ambas seguindo a lei do inverso do quadrado."
+    },
+    {
+        q: "A força de Coulomb é uma 'grandeza vetorial'. Isso significa que ela possui:",
+        options: ["A) Apenas valor numérico.", "B) Apenas direção.", "C) Módulo (intensidade), direção e sentido.", "D) Apenas carga e massa.", "E) Valor fixo em qualquer lugar do universo."],
+        correct: 2,
+        explain: "Grandezas vetoriais exigem intensidade (número), direção (ex: horizontal) e sentido (ex: para a direita) para serem totalmente compreendidas."
+    }
+];
+
+const quizContainer = document.getElementById('quiz');
+
+questions.forEach((item, index) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+    
+    const qText = document.createElement('div');
+    qText.className = 'question-text';
+    qText.innerText = `${index + 1}. ${item.q}`;
+    qDiv.appendChild(qText);
+    
+    const optionsDiv = document.createElement('div');
+    optionsDiv.className = 'options';
+    
+    item.options.forEach((opt, optIndex) => {
+        const optBtn = document.createElement('div');
+        optBtn.className = 'option';
+        optBtn.innerText = opt;
+        optBtn.onclick = () => checkAnswer(optBtn, index, optIndex, optionsDiv);
+        optionsDiv.appendChild(optBtn);
+    });
+    
+    qDiv.appendChild(optionsDiv);
+    
+    const explanationDiv = document.createElement('div');
+    explanationDiv.className = 'explanation';
+    explanationDiv.id = `explain-${index}`;
+    explanationDiv.innerHTML = `<strong>Resposta Correta:</strong> ${item.options[item.correct]}<br><br><strong>Explicação:</strong> ${item.explain}`;
+    qDiv.appendChild(explanationDiv);
+    
+    quizContainer.appendChild(qDiv);
+});
+
+function checkAnswer(selectedBtn, qIndex, optIndex, parent) {
+    const correctIndex = questions[qIndex].correct;
+    const explanation = document.getElementById(`explain-${qIndex}`);
+    
+    // Desabilitar outros cliques nesta questão
+    const options = parent.querySelectorAll('.option');
+    options.forEach(opt => opt.style.pointerEvents = 'none');
+    
+    if (optIndex === correctIndex) {
+        selectedBtn.classList.add('correct');
+    } else {
+        selectedBtn.classList.add('incorrect');
+        options[correctIndex].classList.add('correct');
+    }
+    
+    explanation.style.display = 'block';
+}
+</script>
+
+</body>
+</html>
