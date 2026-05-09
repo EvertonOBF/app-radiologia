@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo: Corrente Elétrica - Portal Radiologia</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f4f7f6;
+            --text-color: #444444;
+            --light-text: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Cabecalho de Navegacao */
+        .navbar {
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Secoes de Conteudo */
+        .content-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary-color);
+        }
+
+        /* Adicionado Alinhamento Justificado para Textos */
+        .content-section p, .content-section li {
+            text-align: justify;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-top: 0;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .highlight-box {
+            background-color: #e8f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+            text-align: justify;
+        }
+
+        /* Estilo do Mapa Mental (Grid CSS) */
+        .mind-map-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: #fdfdfd;
+            border-radius: 10px;
+            border: 1px dashed #bdc3c7;
+        }
+
+        .node-center {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+        }
+
+        .branches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .node-branch {
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .node-branch p {
+            text-align: center !important; /* Mantém centralizado no mapa mental */
+        }
+
+        .node-branch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .node-branch h3 {
+            margin: 0 0 10px 0;
+            color: var(--secondary-color);
+        }
+
+        .formula {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        /* Imagens levemente menores (75% de largura) */
+        .img-ilustrativa {
+            max-width: 75%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* ========================================================= */
+        /* ESTILOS DO SIMULADOR INTERATIVO                           */
+        /* ========================================================= */
+        .simulator-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-top: 20px;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .control-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #dcdde1;
+        }
+
+        .control-box label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            color: #2f3640;
+        }
+
+        .control-box input[type="range"], .control-box select {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .stats-panel {
+            display: flex;
+            justify-content: space-around;
+            background: #2f3640;
+            color: #f5f6fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 4px solid #3498db;
+        }
+
+        .stat-item strong {
+            font-size: 1.4em;
+            color: #00a8ff;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .visual-area {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ecf0f1;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            border: 1px inset #bdc3c7;
+        }
+
+        .wire-base {
+            background: linear-gradient(to bottom, #7f8c8d, #95a5a6, #7f8c8d);
+            width: 50%; 
+            height: 16px; 
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            transition: height 0.3s ease, width 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #34495e;
+        }
+
+        .micro-eletron {
+            width: 4px;
+            height: 4px;
+            background: #a9cce3;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 5px #ffffff, 0 0 8px #3498db;
+            animation: flow linear infinite;
+            display: none; 
+        }
+
+        @keyframes flow {
+            0% { left: -5%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../index.html">← Voltar para o Portal</a>
+    </div>
+
+    <div class="container">
+        
+        <div class="content-section" style="border-left-color: #3498db;">
+            <h1>O que é Corrente Elétrica?</h1>
+            <p>Imagine uma rodovia lotada de carros em movimento contínuo. A corrente elétrica é muito semelhante, mas em vez de carros, temos <strong>elétrons livres</strong> viajando através de um material condutor (como um fio de cobre).</p>
+            
+            <img class="img-ilustrativa" src="imagens/imagem2.png" alt="Fluxo de elétrons em um condutor">
+
+            <div class="highlight-box">
+                <strong>Definição Formal:</strong> Corrente elétrica é o fluxo ordenado de cargas elétricas que se movem de um ponto a outro.
+            </div>
+
+            <p>A intensidade dessa corrente é medida em <strong>Ampères (A)</strong> e representa a quantidade de carga elétrica (Q) que passa por uma seção do condutor em um intervalo de tempo (t).</p>
+            <div class="formula">
+                $$I = \frac{\Delta Q}{\Delta t}$$
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #f39c12;">
+            <h2>O que é Tensão Elétrica?</h2>
+            <p>Os elétrons não se movem de forma ordenada por conta própria. Eles precisam de um "empurrão". Esse empurrão é a <strong>Tensão Elétrica</strong>, também conhecida como Diferença de Potencial (ddp).</p>
+            <p>Se pensarmos na eletricidade como água fluindo em um cano, a tensão seria a <strong>pressão</strong> da bomba d'água. Sem tensão, não há força para criar a corrente.</p>
+            <ul>
+                <li><strong>Unidade de medida:</strong> Volts (V).</li>
+                <li><strong>Símbolo comum:</strong> V ou U.</li>
+            </ul>
+        </div>
+
+        <div class="content-section" style="border-left-color: #e74c3c;">
+            <h2>Resistência e a 2ª Lei de Ohm</h2>
+            <p>Enquanto a tensão tenta empurrar os elétrons, o material pelo qual eles viajam tenta atrapalhar esse fluxo. Essa oposição natural ao movimento das cargas é chamada de <strong>Resistência Elétrica</strong>, medida em <strong>Ohms (Ω)</strong>.</p>
+            
+            <p>A <strong>2ª Lei de Ohm</strong> (ou Lei de Pouillet) explica que a resistência de um condutor não depende apenas do material do qual ele é feito, mas também da sua <strong>geometria</strong>. Ela é diretamente proporcional ao comprimento do fio e inversamente proporcional à sua área de seção transversal (espessura).</p>
+            
+            <div style="text-align: center; font-size: 1.2em; margin: 15px 0; overflow-x: auto;">
+                $$R = \rho \frac{L}{A}$$
+            </div>
+            
+            <ul style="margin-bottom: 30px;">
+                <li><strong>R</strong>: Resistência elétrica (em Ohms, Ω).</li>
+                <li><strong>&rho; (Rô)</strong>: Resistividade elétrica, uma propriedade intrínseca que varia de material para material (em Ω·m).</li>
+                <li><strong>L</strong>: Comprimento do condutor (em metros). Fios mais longos oferecem um caminho maior para os elétrons colidirem, aumentando a resistência.</li>
+                <li><strong>A</strong>: Área da seção transversal (em m²). Fios mais grossos oferecem mais espaço para o fluxo, diminuindo a resistência.</li>
+            </ul>
+        </div>
+
+        <div class="content-section" style="border-left-color: #9b59b6;">
+            <h2>A Relação: O Cálculo da Corrente (1ª Lei de Ohm)</h2>
+            <p>Agora que conhecemos os três personagens (Tensão, Corrente e Resistência), podemos entender como eles interagem. A <strong>1ª Lei de Ohm</strong> estabelece que a corrente que flui por um circuito é diretamente proporcional à Tensão aplicada e inversamente proporcional à Resistência do caminho.</p>
+            
+            <div class="formula">
+                $$I = \frac{V}{R}$$
+            </div>
+
+            <p>Ou seja: Se aumentarmos o empurrão (V), o fluxo de elétrons (I) aumenta. Se aumentarmos os obstáculos (R), o fluxo diminui. Veja o diagrama abaixo para consolidar essas grandezas:</p>
+
+            <img class="img-ilustrativa" src="imagens/imagem1.png" alt="Relação entre Tensão, Corrente e Resistência">
+
+            <div class="mind-map-container">
+                <div class="node-center">O Circuito Elétrico Básico</div>
+                
+                <div class="branches">
+                    <div class="node-branch" style="border-color: #3498db;">
+                        <h3>Corrente (I)</h3>
+                        <p>O <strong>Fluxo</strong>.<br>A quantidade de carga.</p>
+                        <span style="color: #3498db; font-weight: bold;">Ampère (A)</span>
+                    </div>
+                    
+                    <div class="node-branch" style="border-color: #e67e22;">
+                        <h3>Tensão (V)</h3>
+                        <p>O <strong>Empurrão</strong>.<br>A força geradora.</p>
+                        <span style="color: #e67e22; font-weight: bold;">Volts (V)</span>
+                    </div>
+                    
+                    <div class="node-branch" style="border-color: #e74c3c;">
+                        <h3>Resistência (R)</h3>
+                        <p>O <strong>Obstáculo</strong>.<br>A dificuldade do caminho.</p>
+                        <span style="color: #e74c3c; font-weight: bold;">Ohm (Ω)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #f1c40f;">
+            <h2>Velocidade de Deriva (Drift Velocity)</h2>
+            <p>É comum pensar que, ao ligar um interruptor, os elétrons viajam na velocidade da luz através do fio. Na realidade, a energia do campo elétrico se propaga quase na velocidade da luz, mas <strong>as partículas físicas (os elétrons) se movem de forma muito lenta</strong>, colidindo constantemente com os átomos do material.</p>
+            <p>O movimento resultante, lento e direcional a favor da corrente, é chamado de <strong>Velocidade de Deriva</strong> (v<sub>d</sub>). Ela é incrivelmente lenta, na casa dos milímetros por segundo. A velocidade é calculada relacionando a densidade de corrente com as propriedades microscópicas do condutor:</p>
+
+            <div style="text-align: center; font-size: 1.2em; margin: 15px 0; overflow-x: auto;">
+                $$v_d = \frac{J}{n \cdot e}$$
+            </div>
+
+            <ul>
+                <li><strong>v<sub>d</sub></strong>: Velocidade de deriva (em m/s).</li>
+                <li><strong>J</strong>: Densidade de corrente (\(J = I/A\), em A/m²).</li>
+                <li><strong>n</strong>: Densidade de portadores de carga livres do material (elétrons disponíveis por m³).</li>
+                <li><strong>e</strong>: Carga elementar do elétron (\(1.6 \times 10^{-19}\) C).</li>
+            </ul>
+            <p>A fórmula comprova que, se apertarmos o caminho (diminuindo a área, o que aumenta a densidade J) e quisermos manter a mesma corrente total, os elétrons precisam se mover mais rápido para compensar o espaço reduzido.</p>
+        </div>
+
+        <div class="content-section" style="border-left-color: #2ecc71;">
+            <h2 id="simulacao-visual">Laboratório Virtual: Corrente e Velocidade de Deriva</h2>
+            <p>Acompanhe a verdadeira física dos materiais: a quantidade de portadores em movimento representa a intensidade da Corrente (I), enquanto a lentidão real do fluxo reflete a Velocidade de Deriva (v<sub>d</sub>).</p>
+            
+            <div class="simulator-card">
+                <div class="settings-grid">
+                    <div class="control-box">
+                        <label>Material do Condutor:</label>
+                        <select id="material-select">
+                            <option value="Cobre" data-rho="1.68e-8" data-n="8.5e28">Cobre (n = 8.5 × 10²⁸ e/m³)</option>
+                            <option value="Ouro" data-rho="2.44e-8" data-n="5.9e28">Ouro (n = 5.9 × 10²⁸ e/m³)</option>
+                            <option value="Aluminio" data-rho="2.82e-8" data-n="1.81e29">Alumínio (n = 1.81 × 10²⁹ e/m³)</option>
+                            <option value="Ferro" data-rho="9.71e-8" data-n="1.7e29" selected>Ferro (n = 1.7 × 10²⁹ e/m³)</option>
+                            <option value="Vidro" data-rho="1.0e12" data-n="1.0e9">Vidro / Isolante (n ≈ 10⁹ e/m³)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-box">
+                        <label>Tensão (V): <span id="v-val">1.0</span> V</label>
+                        <input type="range" id="v-slider" min="0.1" max="20" value="1.0" step="0.1">
+                    </div>
+
+                    <div class="control-box">
+                        <label>Comprimento (L): <span id="l-val">10</span> m</label>
+                        <input type="range" id="l-slider" min="1" max="10" value="10" step="1">
+                    </div>
+
+                    <div class="control-box">
+                        <label>Área da Seção (A): <span id="a-val">2</span> mm²</label>
+                        <input type="range" id="a-slider" min="2" max="20" value="2" step="2">
+                    </div>
+                </div>
+
+                <div class="stats-panel">
+                    <div class="stat-item">Resistência (R):<br><strong id="r-res">0.0 Ω</strong></div>
+                    <div class="stat-item">Corrente (I):<br><strong id="i-res">0.0 A</strong></div>
+                    <div class="stat-item" style="border-left: 2px solid #576574; padding-left: 20px;">Velocidade de Deriva (v<sub>d</sub>):<br><strong id="vd-res">0.0 m/s</strong></div>
+                </div>
+
+                <div class="visual-area">
+                    <div id="wire-dynamic" class="wire-base">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #34495e;">
+            <h2>Aplicação na Radiologia: mA e kVp</h2>
+            <p>Por que os técnicos de radiologia estudam isso? Porque dentro da ampola de raios-X, esses conceitos são a essência para a geração da imagem!</p>
+
+            <img class="img-ilustrativa" src="imagens/imagem3.png" alt="Tubo de raios-x mostrando fluxo do cátodo para o ânodo">
+
+            <ul>
+                <li><strong>O "mA" (Miliamperagem):</strong> Refere-se à <em>Corrente</em>. Ao ajustar o mA no painel do equipamento, o técnico está decidindo <strong>quantos elétrons</strong> vão viajar do cátodo para o ânodo em um dado tempo. Mais corrente = mais elétrons colidindo com o alvo = maior <em>quantidade</em> de raios-X produzidos.</li>
+                <br>
+                <li><strong>O "kVp" (Quilovoltagem de Pico):</strong> Refere-se à <em>Tensão</em>. É a extrema força eletromotriz que acelera esses elétrons em direção ao alvo (ânodo). Maior kVp = os elétrons ganham mais energia cinética = resultando em raios-X com maior <em>energia e poder de penetração</em> nos tecidos.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer style="text-align: center; color: var(--light-text); padding: 20px; font-size: 0.85em;">
+        <p>&copy; 2026 - Física - Radiologia | Desenvolvido por Everton Castro</p>
+    </footer>
+
+    <script>
+        const CARGA_ELEMENTAR = 1.6e-19; 
+        
+        const mSelect = document.getElementById('material-select');
+        const vSld = document.getElementById('v-slider');
+        const lSld = document.getElementById('l-slider');
+        const aSld = document.getElementById('a-slider');
+        const wire = document.getElementById('wire-dynamic');
+
+        function formatUnitHTML(value, unitStr) {
+            if (value === 0) return "0.0 " + unitStr;
+            let v = Math.abs(value);
+            
+            if (v >= 1e12) {
+                let parts = value.toExponential(1).split('e+');
+                return parts[0] + " × 10<sup>" + parts[1] + "</sup> " + unitStr;
+            }
+            if (v >= 1e9)  return (value / 1e9).toFixed(1) + " G" + unitStr;
+            if (v >= 1e6)  return (value / 1e6).toFixed(1) + " M" + unitStr;
+            if (v >= 1e3)  return (value / 1e3).toFixed(1) + " k" + unitStr;
+            if (v >= 1)    return value.toFixed(1) + " " + unitStr;
+            if (v >= 1e-3) return (value * 1e3).toFixed(1) + " m" + unitStr;
+            if (v >= 1e-6) return (value * 1e6).toFixed(1) + " µ" + unitStr;
+            if (v >= 1e-9) return (value * 1e9).toFixed(1) + " n" + unitStr;
+            if (v >= 1e-12) return (value * 1e12).toFixed(1) + " p" + unitStr;
+            
+            return "≈ 0.0 " + unitStr; 
+        }
+
+        const maxParticles = 200;
+        for(let i = 0; i < maxParticles; i++) {
+            let p = document.createElement('div');
+            p.className = 'micro-eletron';
+            p.style.top = (Math.random() * 80 + 10) + '%'; 
+            p.style.animationDelay = (Math.random() * -50) + 's'; 
+            wire.appendChild(p);
+        }
+        const allParticles = document.querySelectorAll('.micro-eletron');
+
+        function updatePhysics() {
+            let selectedOption = mSelect.options[mSelect.selectedIndex];
+            let rho = parseFloat(selectedOption.getAttribute('data-rho'));
+            let n = parseFloat(selectedOption.getAttribute('data-n'));
+
+            let v = parseFloat(vSld.value);
+            let l_m = parseFloat(lSld.value); 
+            let a_mm2 = parseFloat(aSld.value);
+            let a_m2 = a_mm2 * 1e-6; 
+
+            // FÍSICA REAL DO SISTEMA
+            let R = rho * (l_m / a_m2);
+            let I = v / R;
+            let J = I / a_m2; 
+            let vd = J / (n * CARGA_ELEMENTAR); 
+
+            // ATUALIZAÇÃO TEXTUAL
+            document.getElementById('v-val').textContent = v.toFixed(1);
+            document.getElementById('l-val').textContent = l_m;
+            document.getElementById('a-val').textContent = a_mm2; 
+
+            document.getElementById('r-res').innerHTML = formatUnitHTML(R, "Ω");
+            document.getElementById('i-res').innerHTML = formatUnitHTML(I, "A");
+            
+            if (I < 1e-9) {
+                document.getElementById('vd-res').innerHTML = "≈ 0.0 m/s";
+            } else {
+                document.getElementById('vd-res').innerHTML = formatUnitHTML(vd, "m/s");
+            }
+
+            // ATUALIZAÇÃO VISUAL DO FIO
+            let visualWidth = 20 + (l_m * 8); 
+            wire.style.width = visualWidth + "%";
+            wire.style.height = (10 + (a_mm2 * 2)) + "px"; 
+
+            // FÍSICA DA ANIMAÇÃO
+            let speedDuration = 0;
+            if (vd > 0) {
+                speedDuration = 0.01 / vd;
+                if (speedDuration < 0.1) speedDuration = 0.1; 
+                if (speedDuration > 120) speedDuration = 120; 
+            }
+
+            let numParticles = 0;
+            if (I > 1e-9) { 
+                let logI = Math.log10(I);
+                numParticles = Math.floor(35.5 * (logI + 1) + 5);
+                if (numParticles < 1) numParticles = 1;
+                if (numParticles > maxParticles) numParticles = maxParticles;
+            }
+
+            if (rho > 1) {
+                speedDuration = 0;
+                numParticles = 0;
+            }
+
+            allParticles.forEach((p, index) => {
+                if (index < numParticles && speedDuration > 0) {
+                    p.style.display = 'block';
+                    p.style.animationDuration = speedDuration + 's';
+                } else {
+                    p.style.display = 'none';
+                }
+            });
+        }
+
+        [mSelect, vSld, lSld, aSld].forEach(el => el.addEventListener('input', updatePhysics));
+        updatePhysics(); 
+    </script>
+</body>
+</html>
