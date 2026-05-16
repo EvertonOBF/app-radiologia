@@ -381,6 +381,52 @@
             </ul>
             <p>A fórmula comprova que, se apertarmos o caminho (diminuindo a área, o que aumenta a densidade J) e quisermos manter a mesma corrente total, os elétrons precisam se mover mais rápido para compensar o espaço reduzido.</p>
         </div>
+        
+        <div class="content-section" style="border-left-color: #e67e22;">
+            <h2>Potência Elétrica e o Efeito Joule</h2>
+            <p>Imagine que a Tensão é a força e a Corrente é o movimento. Quando combinamos a força com o movimento, realizamos um "trabalho". A rapidez com que a energia elétrica é transformada em outra forma de energia (como luz, movimento ou calor) é chamada de <strong>Potência Elétrica</strong>, medida em <strong>Watts (W)</strong>.</p>
+            
+            <div class="formula">
+                $$P = V \cdot I$$
+            </div>
+
+            <p>No entanto, a viagem dos elétrons não é livre de obstáculos. Ao atravessarem um condutor que possui resistência, eles colidem constantemente com os átomos do material. Esse "atrito atômico" faz com que grande parte da energia elétrica seja transformada em <strong>calor</strong>. A esse fenômeno damos o nome de <strong>Efeito Joule</strong>.</p>
+
+            <img class="img-ilustrativa" src="imagens/efeito_joule.png" alt="Ilustração de elétrons colidindo com a rede atômica e gerando calor">
+
+            <div class="highlight-box">
+                <strong>O Efeito Joule na Prática:</strong> No dia a dia, é esse princípio que faz o seu chuveiro elétrico ou o secador de cabelo esquentarem! Na radiologia, o Efeito Joule é o responsável direto por aquecer o filamento do cátodo a mais de 2.200 °C, fazendo-o "ferver" e liberar a nuvem de elétrons (efeito termiônico).
+            </div>
+
+            <p>Se usarmos a 1ª Lei de Ohm ($V = R \cdot I$) e substituirmos na fórmula da potência, descobrimos que a potência dissipada (perdida em forma de calor) pode ser calculada como:</p>
+            
+            <div class="formula">
+                $$P = R \cdot I^2$$
+            </div>
+            
+            <p><strong>Cuidado!</strong> Observe que a corrente ($I$) está elevada ao quadrado. Isso significa que se você dobrar a corrente elétrica passando por um fio, o calor gerado não apenas dobra, ele <strong>quadruplica</strong>! É por isso que os fios podem derreter rapidamente em um curto-circuito.</p>
+        </div>
+        <div class="content-section" style="border-left-color: #16a085;">
+            <h2>Consumo de Energia Elétrica</h2>
+            <p>Se a potência é o "ritmo" ou a "velocidade" em que a energia é gasta, o <strong>Consumo de Energia</strong> é o total acumulado dessa energia ao longo do tempo. É exatamente por isso que a concessionária de energia cobra na conta de luz da sua clínica no final do mês!</p>
+
+            <p>Para descobrir quanta energia elétrica ($E$) um equipamento consumiu, basta multiplicar a potência ($P$) pelo tempo ($\Delta t$) em que ele permaneceu ligado:</p>
+
+            <div class="formula">
+                $$E = P \cdot \Delta t$$
+            </div>
+
+            <img class="img-ilustrativa" src="imagens/consumo_energia.png" alt="Medidor de energia elétrica e conta de luz">
+
+            <ul style="margin-bottom: 25px;">
+                <li><strong>No Sistema Internacional (SI):</strong> A energia é medida em <strong>Joules (J)</strong> (usando a potência em Watts e o tempo em segundos).</li>
+                <li><strong>No dia a dia (Conta de Luz):</strong> O Joule é uma unidade muito pequena. Por isso, as contas de luz cobram em <strong>Quilowatt-hora (kWh)</strong>. Para chegar nesse valor, usamos a potência em Quilowatts ($1\text{ kW} = 1000\text{ W}$) e o tempo em horas ($h$).</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>O Paradoxo Radiológico:</strong> Um tubo de Raios-X ou um Tomógrafo possui uma potência instantânea gigantesca (dezenas de milhares de Watts para dar aquele "empurrão" de kVp). No entanto, como o tempo do disparo dura apenas frações de milissegundos, o consumo real de energia na conta de luz é pequeno. Por outro lado, o sistema de refrigeração (ar-condicionado) da sala de Ressonância Magnética tem uma potência menor, mas consome <em>muito mais energia no fim do mês</em> porque fica ligado 24 horas por dia!
+            </div>
+        </div>
 
         <div class="content-section" style="border-left-color: #2ecc71;">
             <h2 id="simulacao-visual">Laboratório Virtual: Corrente e Velocidade de Deriva</h2>
@@ -440,9 +486,24 @@
                 <li><strong>O "kVp" (Quilovoltagem de Pico):</strong> Refere-se à <em>Tensão</em>. É a extrema força eletromotriz que acelera esses elétrons em direção ao alvo (ânodo). Maior kVp = os elétrons ganham mais energia cinética = resultando em raios-X com maior <em>energia e poder de penetração</em> nos tecidos.</li>
             </ul>
         </div>
+        <div class="content-section" style="border-left-color: #8e44ad;">
+            <h2>Corrente Contínua (CC) vs. Corrente Alternada (CA)</h2>
+            <p>Até agora, falamos do fluxo de elétrons como se eles sempre viajassem em uma única direção. Mas sabia que existem duas "modalidades" de trânsito para essas partículas?</p>
+            
+            <ul>
+                <li><strong>Corrente Contínua (CC ou DC):</strong> O fluxo de elétrons ocorre sempre em um <strong>único sentido</strong>. É como uma rua de mão única. A tensão se mantém constante ao longo do tempo. É o tipo de corrente fornecida por pilhas, baterias e usada nos circuitos eletrônicos internos (placas de computador, celulares).</li>
+                <br>
+                <li><strong>Corrente Alternada (CA ou AC):</strong> Os elétrons não viajam de um ponto a outro de forma linear; eles <strong>oscilam para frente e para trás</strong> muitas vezes por segundo (no Brasil, 60 vezes por segundo, ou 60 Hz). A tensão sobe e desce formando uma onda. Esse tipo é muito mais fácil e barato para ser transportado por longas distâncias, por isso é o que chega nas tomadas da nossa casa e dos hospitais.</li>
+            </ul>
 
+            <img class="img-ilustrativa" src="imagens/cc_vs_ca.png" alt="Gráficos comparando Corrente Contínua e Corrente Alternada">
+
+            <div class="highlight-box">
+                <strong>O Segredo na Radiologia (Retificação de Circuito):</strong> O equipamento de raio-X é um gigante que é ligado na tomada da parede, recebendo muita energia em Corrente Alternada (CA). No entanto, o tubo de raios-X <strong>exige rigorosamente</strong> Corrente Contínua (CC)! Se os elétrons oscilassem dentro da ampola, eles voariam do ânodo de volta para o cátodo, destruindo o equipamento de dentro para fora. Por isso, os geradores possuem um circuito chamado <strong>Retificador</strong>, que tem a nobre missão de transformar a energia oscilante da parede em um fluxo de mão única (CC) perfeito para a ampola de raios-X funcionar em segurança!
+            </div>
+        </div> 
     </div>
-
+    
     <footer style="text-align: center; color: var(--light-text); padding: 20px; font-size: 0.85em;">
         <p>&copy; 2026 - Física - Radiologia | Desenvolvido por Everton Castro</p>
     </footer>

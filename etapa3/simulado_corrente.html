@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado: Eletrodinâmica na Radiologia</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f4f7f6;
+            --text-color: #444444;
+            --light-text: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .question-block {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .question-block p {
+            text-align: justify;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            background: #f8f9fa;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .options li:hover {
+            background: #e8f4f8;
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .options li.correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .options li.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 6px;
+            color: var(--secondary-color);
+            text-align: justify;
+        }
+
+        .explanation strong {
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--light-text);
+            padding: 20px;
+            font-size: 0.85em;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#">← Retornar aos Módulos</a>
+    </div>
+
+    <div class="container">
+        
+        <div class="header-section">
+            <h1>Simulado: Eletrodinâmica Básica na Radiologia</h1>
+            <p style="color: var(--light-text);">Fundamentos de física para estudantes do 1º Semestre.</p>
+        </div>
+
+        <div class="question-block" style="border-left-color: var(--primary-color);">
+            <p><strong>1.</strong> Ao ligar o equipamento de raio X na tomada, ele recebe a energia necessária para funcionar. Como chamamos a grandeza física, medida em Volts, que atua como a "força" responsável por empurrar as cargas elétricas através dos fios do equipamento?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">A) Corrente Elétrica.</li>
+                <li onclick="checkAnswer(this, true, 'exp1')" data-correct="true">B) Diferença de Potencial (DDP) ou Tensão.</li>
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">C) Resistência Elétrica.</li>
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">D) Efeito Joule.</li>
+            </ul>
+            <div id="exp1" class="explanation">
+                <strong>Análise do Conceito:</strong> A Tensão ou Diferença de Potencial (DDP) é o que fornece o "empurrão" para que as cargas elétricas se movimentem. Sem DDP, os elétrons ficam parados e o equipamento não liga.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #f39c12;">
+            <p><strong>2.</strong> A eletricidade é fundamental para gerar raios X. Fisicamente, como podemos definir a "Corrente Elétrica" que viaja pelos cabos do painel de comando?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, true, 'exp2')" data-correct="true">A) É o fluxo ordenado de partículas carregadas (elétrons) através de um condutor.</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">B) É a oposição ao movimento das cargas dentro de um fio.</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">C) É a energia que se transforma em calor (aquecimento).</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">D) É o movimento aleatório e bagunçado dos prótons dentro de um isolante.</li>
+            </ul>
+            <div id="exp2" class="explanation">
+                <strong>Análise do Conceito:</strong> A corrente elétrica acontece quando os elétrons livres de um metal (como os fios do equipamento) são organizados para se moverem todos na mesma direção.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #e74c3c;">
+            <p><strong>3.</strong> Nos equipamentos radiológicos, os cabos de alimentação são feitos de cobre revestido por borracha. Qual a justificativa física para usarmos o cobre no interior do cabo?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">A) O cobre atua como isolante elétrico para proteger o técnico.</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">B) O cobre possui altíssima resistência elétrica, freando a energia do gerador.</li>
+                <li onclick="checkAnswer(this, true, 'exp3')" data-correct="true">C) O cobre é um material condutor com baixa resistividade elétrica, permitindo a passagem da corrente com facilidade.</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">D) O cobre transforma rapidamente toda a energia em calor pelo Efeito Joule.</li>
+            </ul>
+            <div id="exp3" class="explanation">
+                <strong>Análise do Conceito:</strong> Materiais condutores (como o cobre) possuem baixa resistividade, oferecendo um caminho "fácil" e com poucos obstáculos para os elétrons passarem da tomada até o equipamento. A borracha em volta atua como isolante de proteção.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #9b59b6;">
+            <p><strong>4.</strong> Quando o técnico de radiologia aperta o botão de disparo no painel, o comando chega à ampola quase instantaneamente. No entanto, se considerarmos a "Velocidade de Deriva" (Drift Velocity) dos elétrons reais que estão dentro dos fios, o que é correto afirmar?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">A) Os elétrons viajam do painel até a ampola na velocidade da luz.</li>
+                <li onclick="checkAnswer(this, true, 'exp4')" data-correct="true">B) Os elétrons se movem bem devagar, em milímetros por segundo, mas a energia do "empurrão" se propaga muito rapidamente pelo fio inteiro.</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">C) Os elétrons ficam parados, apenas os prótons viajam pelo fio.</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">D) A velocidade de deriva aumenta se trocarmos o fio por um material mais resistente.</li>
+            </ul>
+            <div id="exp4" class="explanation">
+                <strong>Análise do Conceito:</strong> Pense em um tubo longo cheio de bolinhas. Se você empurrar uma bolinha em uma ponta, a bolinha da outra ponta cai quase instantaneamente. A "ordem" viaja muito rápido, mas cada bolinha (elétron) individual andou muito pouco. Isso é a velocidade de deriva.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #1abc9c;">
+            <p><strong>5.</strong> O Efeito Joule é um fenômeno constante na vida do técnico em radiologia, pois grande parte da energia no tubo de raios X se transforma nesse efeito, exigindo sistemas de resfriamento. O que o Efeito Joule descreve?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">A) A conversão de calor em eletricidade limpa.</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">B) A transformação da corrente elétrica em radiação pura, sem perdas.</li>
+                <li onclick="checkAnswer(this, true, 'exp5')" data-correct="true">C) A conversão da energia elétrica em energia térmica (calor) devido à resistência que o material impõe à passagem da corrente.</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">D) O aumento da velocidade dos elétrons ao passar pelo vácuo.</li>
+            </ul>
+            <div id="exp5" class="explanation">
+                <strong>Análise do Conceito:</strong> O Efeito Joule ocorre quando os elétrons, ao caminharem por um condutor, trombam com os átomos do material. Esse "atrito" gera calor. É o que faz o chuveiro elétrico esquentar e o que aquece a ampola de raio X durante os exames.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: var(--primary-color);">
+            <p><strong>6.</strong> A 1ª Lei de Ohm estabelece uma relação direta entre Tensão (Voltagem), Corrente e Resistência. Imagine um componente do painel de controle que possui uma resistência fixa. Se você <strong>dobrar</strong> a tensão aplicada a esse componente, o que acontecerá com a corrente elétrica?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, true, 'exp6')" data-correct="true">A) A corrente elétrica também irá dobrar.</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">B) A corrente elétrica cairá pela metade.</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">C) A corrente elétrica permanecerá inalterada.</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">D) O componente se tornará um isolante.</li>
+            </ul>
+            <div id="exp6" class="explanation">
+                <strong>Análise do Conceito:</strong> Pela 1ª Lei de Ohm ($V = R \cdot I$), tensão e corrente são diretamente proporcionais (num material ôhmico). Se a resistência (o freio) é a mesma, dar um "empurrão" duas vezes mais forte (dobrar a tensão) fará passar duas vezes mais elétrons (dobrar a corrente).
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #f39c12;">
+            <p><strong>7.</strong> De acordo com a 2ª Lei de Ohm, a espessura de um fio (área de seção transversal) e seu comprimento influenciam em sua resistência elétrica. Para transmitir eletricidade da parede para o equipamento com a menor resistência possível, o cabo ideal deveria ser:</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp7')" data-correct="false">A) Muito longo e muito fino, para economizar espaço.</li>
+                <li onclick="checkAnswer(this, false, 'exp7')" data-correct="false">B) Longo e de material isolante.</li>
+                <li onclick="checkAnswer(this, true, 'exp7')" data-correct="true">C) Curto e grosso, pois oferece menos obstáculos e um "corredor largo" para os elétrons passarem.</li>
+                <li onclick="checkAnswer(this, false, 'exp7')" data-correct="false">D) Fino e de material com alta resistividade.</li>
+            </ul>
+            <div id="exp7" class="explanation">
+                <strong>Análise do Conceito:</strong> A resistência atua como um trânsito na estrada. Uma estrada curta e bem larga (fio curto e grosso) permite que os carros (elétrons) fluam sem engarrafamento, resultando em menor resistência elétrica.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #e74c3c;">
+            <p><strong>8.</strong> Um pequeno monitor auxiliar no painel de controle da sala de raio X funciona com uma tensão (DDP) de $110\text{ V}$. Sabendo que a resistência elétrica dos componentes desse monitor é de $22\ \Omega$, calcule a corrente elétrica ($I$) que percorre o circuito.</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp8')" data-correct="false">A) $2.420\text{ A}$</li>
+                <li onclick="checkAnswer(this, false, 'exp8')" data-correct="false">B) $2\text{ A}$</li>
+                <li onclick="checkAnswer(this, false, 'exp8')" data-correct="false">C) $0,2\text{ A}$</li>
+                <li onclick="checkAnswer(this, true, 'exp8')" data-correct="true">D) $5\text{ A}$</li>
+            </ul>
+            <div id="exp8" class="explanation">
+                <strong>Análise do Conceito:</strong> Usando a fórmula da 1ª Lei de Ohm: Corrente ($I$) = Tensão ($V$) / Resistência ($R$). <br>
+                Portanto, $I = 110 / 22 = 5\text{ A}$.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #9b59b6;">
+            <p><strong>9.</strong> O técnico de manutenção observa que um cabo de alimentação do sistema de radiografia de $5\text{ metros}$ possui uma resistência de $2\ \Omega$. Se ele precisar afastar o equipamento e trocar esse cabo por um idêntico (mesmo cobre, mesma grossura), mas com $10\text{ metros}$ de comprimento, qual será a resistência elétrica desse novo cabo?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp9')" data-correct="false">A) $1\ \Omega$</li>
+                <li onclick="checkAnswer(this, true, 'exp9')" data-correct="true">B) $4\ \Omega$</li>
+                <li onclick="checkAnswer(this, false, 'exp9')" data-correct="false">C) $2\ \Omega$</li>
+                <li onclick="checkAnswer(this, false, 'exp9')" data-correct="false">D) $10\ \Omega$</li>
+            </ul>
+            <div id="exp9" class="explanation">
+                <strong>Análise do Conceito:</strong> Pela 2ª Lei de Ohm, a resistência é diretamente proporcional ao comprimento. Se o comprimento dobrou (de $5\text{m}$ para $10\text{m}$), o "caminho de obstáculos" ficou duas vezes maior. Logo, a resistência também dobra: de $2\ \Omega$ para $4\ \Omega$.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #1abc9c;">
+            <p><strong>10.</strong> Para aquecer o filamento do raio X e prepará-lo para disparar os elétrons, aplica-se uma baixa tensão, cerca de $10\text{ Volts}$. Se a corrente circulando nesse momento for de $4\text{ Amperes}$, qual é a potência elétrica dissipada (em Watts) para gerar o calor necessário?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, true, 'exp10')" data-correct="true">A) $40\text{ W}$</li>
+                <li onclick="checkAnswer(this, false, 'exp10')" data-correct="false">B) $2,5\text{ W}$</li>
+                <li onclick="checkAnswer(this, false, 'exp10')" data-correct="false">C) $14\text{ W}$</li>
+                <li onclick="checkAnswer(this, false, 'exp10')" data-correct="false">D) $400\text{ W}$</li>
+            </ul>
+            <div id="exp10" class="explanation">
+                <strong>Análise do Conceito:</strong> A Potência ($P$) é calculada multiplicando a Tensão ($V$) pela Corrente ($I$). <br>
+                Fórmula: $P = V \cdot I$.<br>
+                Logo, $P = 10 \cdot 4 = 40\text{ Watts}$.
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 - Portal Radiologia | Desenvolvimento Educacional Interativo</p>
+    </footer>
+
+    <script>
+        function checkAnswer(element, isCorrect, expId) {
+            const parent = element.parentElement;
+            
+            // Impede clicar novamente se já respondido
+            if (parent.classList.contains('answered')) return;
+            parent.classList.add('answered');
+
+            const options = parent.querySelectorAll('li');
+
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+                // Revela visualmente qual era a correta para o aluno
+                options.forEach(opt => {
+                    if (opt.getAttribute('data-correct') === 'true') {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            // Exibe a explicação didática
+            document.getElementById(expId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
