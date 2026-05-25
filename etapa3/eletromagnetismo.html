@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo: Eletromagnetismo - Portal Radiologia</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+                displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f4f7f6;
+            --text-color: #444444;
+            --light-text: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Cabecalho de Navegacao */
+        .navbar {
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Secoes de Conteudo */
+        .content-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .content-section p, .content-section li {
+            text-align: justify;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-top: 0;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .highlight-box {
+            background-color: #e8f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+            text-align: justify;
+        }
+        
+        .radiology-box {
+            background-color: #fcf3cf;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #f1c40f;
+            text-align: justify;
+        }
+
+        /* Estilo do Mapa Mental (Grid CSS) */
+        .mind-map-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: #fdfdfd;
+            border-radius: 10px;
+            border: 1px dashed #bdc3c7;
+        }
+
+        .node-center {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+        }
+
+        .branches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .node-branch {
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .node-branch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .node-branch h3 {
+            margin: 0 0 10px 0;
+            color: var(--secondary-color);
+        }
+
+        .formula {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .img-ilustrativa {
+            max-width: 75%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="magnetismo.html">← Anterior: Magnetismo</a>
+        <a href="#">Próximo: Indução Eletromagnética →</a>
+    </div>
+
+    <div class="container">
+        
+        <div class="content-section" style="border-left-color: #3498db;">
+            <h1>O Eletromagnetismo (Experimento de Oersted)</h1>
+            <p>Até o início do século XIX, a eletricidade e o magnetismo eram estudados como fenômenos completamente independentes. Essa visão mudou radicalmente em 1820, graças ao físico dinamarquês <strong>Hans Christian Ørsted</strong>.</p>
+            
+            <p>Durante uma aula experimental, Ørsted percebeu que a agulha magnética de uma bússola sofria uma deflexão sempre que era colocada próxima a um fio condutor percorrido por uma corrente elétrica. Quando a corrente era desligada, a agulha retornava à sua posição original, alinhada com o campo magnético terrestre.</p>
+            
+            <img class="img-ilustrativa" src="imagens/oersted.png" alt="Experimento de Oersted com bússola e fio condutor">
+
+            <div class="highlight-box">
+                <strong>A Grande Descoberta:</strong> Esse experimento histórico provou que <strong>cargas elétricas em movimento (corrente elétrica) geram um campo magnético ao seu redor</strong>. Esse foi o elo perdido que unificou a eletricidade e o magnetismo em uma única grande área da física: o <em>Eletromagnetismo</em>.
+            </div>
+            
+            <div class="radiology-box">
+                <strong>Conexão com a Radiologia:</strong> Sem essa descoberta de Oersted, os equipamentos modernos de diagnóstico por imagem não existiriam. Toda tecnologia que usa eletricidade para manipular magnetismo (como os potentes magnetos de imagem médica) nasceu deste simples desvio de uma agulha de bússola.
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #e67e22;">
+            <h2>Campo Magnético em um Fio Retilíneo Infinito</h2>
+            <p>Quando uma corrente elétrica constante ($I$) percorre um fio condutor retilíneo e muito longo, as linhas de campo magnético geradas têm formato de <strong>circunferências concêntricas</strong> ao fio, situadas em planos perpendiculares a ele.</p>
+            
+            <p>Para determinar o sentido dessas linhas de campo, utilizamos a <strong>Regra da Mão Direita</strong>:</p>
+            <ul>
+                <li><strong>Polegar:</strong> Aponta no sentido da corrente elétrica ($I$).</li>
+                <li><strong>Demais dedos:</strong> Ao envolverem o condutor, indicam o sentido do vetor indução magnética ($\vec{B}$).</li>
+            </ul>
+
+            <img class="img-ilustrativa" src="imagens/fio_retilineo.png" alt="Regra da mão direita em um fio condutor retilíneo">
+            
+            <p>A intensidade do campo magnético ($B$) em um ponto localizado a uma distância ($r$) do fio é calculada pela Lei de Ampère:</p>
+
+            <div class="formula">
+                $$B = \frac{\mu_0 \cdot I}{2\pi \cdot r}$$
+            </div>
+            
+            <ul style="margin-bottom: 25px;">
+                <li><strong>B</strong>: Módulo do campo magnético (em Tesla, T).</li>
+                <li><strong>$\mu_0$</strong>: Permeabilidade magnética do meio (no vácuo vale $4\pi \times 10^{-7} \text{ T}\cdot\text{m/A}$).</li>
+                <li><strong>I</strong>: Intensidade da corrente elétrica (em Ampères, A).</li>
+                <li><strong>r</strong>: Distância do ponto ao centro do fio (em metros, m).</li>
+            </ul>
+        </div>
+
+        <div class="content-section" style="border-left-color: #e74c3c;">
+            <h2>Campo Magnético em uma Espira Circular</h2>
+            <p>Se pegarmos o condutor retilíneo e o dobrarmos no formato de uma circunferência, criamos uma <strong>espira circular</strong>. Quando a corrente percorre essa espira, as linhas de campo continuam envolvendo o fio, mas se somam e se concentram fortemente em seu interior.</p>
+            
+            <p>Para fins práticos, focamos na intensidade do campo magnético exatamente no <strong>centro geométrico</strong> da espira. A fórmula é muito parecida com a do fio, mas sem o fator $\pi$ no denominador:</p>
+
+            <div class="formula">
+                $$B = \frac{\mu_0 \cdot I}{2 \cdot R}$$
+            </div>
+            <p>Onde <strong>R</strong> é o raio da espira circular em metros (m).</p>
+            
+            <img class="img-ilustrativa" src="imagens/espira_circular.png" alt="Linhas de campo magnético no centro de uma espira circular">
+        </div>
+
+        <div class="content-section" style="border-left-color: #9b59b6;">
+            <h2>Polos Magnéticos da Espira</h2>
+            <p>Como o campo atravessa o plano da espira circular, um dos lados funciona como uma "saída" de linhas de campo e o outro como uma "entrada". Isso significa que uma espira percorrida por corrente atua exatamente como um <strong>ímã plano ou dipolo magnético</strong>.</p>
+            
+            <div class="mind-map-container">
+                <div class="node-center">Regra das Faces da Espira</div>
+                
+                <div class="branches">
+                    <div class="node-branch" style="border-color: #3498db;">
+                        <h3>Polo Norte (N)</h3>
+                        <p>Corrente flui no <strong>sentido anti-horário</strong>.<br>As linhas de campo estão <em>saindo</em> da face em sua direção.</p>
+                    </div>
+                    
+                    <div class="node-branch" style="border-color: #e74c3c;">
+                        <h3>Polo Sul (S)</h3>
+                        <p>Corrente flui no <strong>sentido horário</strong>.<br>As linhas de campo estão <em>entrando</em> na face.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #16a085;">
+            <h2>Campo Magnético em um Solenoide</h2>
+            <p>Um <strong>solenoide</strong> (também conhecido como bobina longa) é obtido quando enrolamos um fio condutor de forma helicoidal, gerando uma sequência contínua de várias espiras circulares paralelas.</p>
+            
+            <p>Quando a corrente circula pelo solenoide, os campos de cada espira se combinam. O resultado é fascinante: no <strong>interior do solenoide</strong>, o campo magnético é praticamente <strong>uniforme</strong> (linhas retas e paralelas) e altamente concentrado.</p>
+            
+            <img class="img-ilustrativa" src="imagens/solenoide.png" alt="Campo magnético no interior de um solenoide">
+
+            <div class="formula">
+                $$B = \mu_0 \cdot \frac{N}{L} \cdot I$$
+            </div>
+
+            <ul>
+                <li><strong>N</strong>: Número total de espiras do solenoide (voltas).</li>
+                <li><strong>L</strong>: Comprimento total do solenoide em metros (m).</li>
+            </ul>
+
+            <div class="radiology-box">
+                <strong>O "Túnel" da Ressonância Magnética (RM):</strong> Um aparelho de RM é essencialmente um solenoide gigante! O túnel cilíndrico onde o paciente deita é o interior dessa grande bobina. Usando correntes elétricas extremamente altas circulando por esse arranjo, os engenheiros conseguem criar o campo magnético massivo e perfeitamente uniforme de 1.5 Tesla ou 3.0 Tesla necessário para alinhar os átomos de hidrogênio do corpo e gerar as imagens médicas.
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #2ecc71;">
+            <h2>O Eletroímã</h2>
+            <p>O <strong>eletroímã</strong> é a união da bobina (solenoide) com a classificação magnética dos materiais. Ele consiste em um solenoide que possui, em seu interior, um núcleo feito de um material <strong>ferromagnético</strong> (como ferro doce ou aço).</p>
+            
+            <p>Quando a corrente flui, o campo magnético gerado pelo solenoide magnetiza instantaneamente o núcleo de ferro, alinhando seus domínios magnéticos. Isso faz com que o campo magnético total seja <strong>multiplicado centenas de vezes</strong>!</p>
+
+            <img class="img-ilustrativa" src="imagens/eletroima.png" alt="Esquema de um eletroímã com núcleo de ferro">
+
+            <div class="highlight-box">
+                <strong>Vantagem Fundamental:</strong> A grande vantagem do eletroímã sobre os ímãs permanentes (pedras magnéticas) é o <strong>controle</strong>. Podemos ligar e desligar o campo magnético instantaneamente cortando a corrente, ou controlar sua força ajustando a intensidade da corrente elétrica.
+            </div>
+
+            <div class="radiology-box">
+                <strong>Bobinas de Gradiente na Radiologia:</strong> Além do magneto principal que fica sempre ligado, os aparelhos de RM possuem eletroímãs menores chamados "Bobinas de Gradiente". Durante o exame, esses pequenos eletroímãs são ligados e desligados rapidamente por pulsos elétricos estruturados. Isso altera ligeiramente o campo magnético local em pontos específicos do corpo do paciente, codificando espacialmente o sinal e permitindo que o computador saiba exatamente de qual parte anatômica (um milímetro do cérebro ou do joelho, por exemplo) aquela informação de imagem está vindo.
+            </div>
+        </div>
+        
+    </div>
+
+    <footer style="text-align: center; color: var(--light-text); padding: 20px; font-size: 0.85em;">
+        <p>&copy; 2026 - Física - Radiologia | Desenvolvido por Everton Castro</p>
+    </footer>
+
+</body>
+</html>

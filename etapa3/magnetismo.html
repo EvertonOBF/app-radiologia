@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo: Magnetismo - Portal Radiologia</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f4f7f6;
+            --text-color: #444444;
+            --light-text: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Cabecalho de Navegacao */
+        .navbar {
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Secoes de Conteudo */
+        .content-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .content-section p, .content-section li {
+            text-align: justify;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-top: 0;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .highlight-box {
+            background-color: #e8f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+            text-align: justify;
+        }
+
+        /* Estilo do Mapa Mental (Grid CSS) */
+        .mind-map-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: #fdfdfd;
+            border-radius: 10px;
+            border: 1px dashed #bdc3c7;
+        }
+
+        .node-center {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+        }
+
+        .branches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .node-branch {
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .node-branch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .node-branch h3 {
+            margin: 0 0 10px 0;
+            color: var(--secondary-color);
+        }
+
+        .formula {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .img-ilustrativa {
+            max-width: 75%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="corrente.html">← Anterior: Eletrodinâmica</a>
+        <a href="eletromagnetismo.html">Próximo: Eletromagnetismo →</a>
+    </div>
+
+    <div class="container">
+        
+        <div class="content-section" style="border-left-color: #3498db;">
+            <h1>O que é o Magnetismo?</h1>
+            <p>Se a eletrodinâmica estuda os elétrons em movimento pelos fios, o <strong>Magnetismo</strong> nos introduz a uma força invisível capaz de atrair ou repelir materiais sem a necessidade de contato físico. Na natureza, certos materiais possuem essa propriedade de forma intrínseca, sendo chamados de <strong>ímãs</strong>.</p>
+            
+            <p>Todo ímã, não importa o seu formato, possui duas regiões onde a força magnética é mais intensa. Chamamos essas regiões de <strong>Polos Magnéticos</strong>:</p>
+
+            <ul>
+                <li><strong>Polo Norte (N)</strong> e <strong>Polo Sul (S)</strong>.</li>
+                <li><strong>Lei da Atração e Repulsão:</strong> Polos opostos se atraem e polos iguais se repelem.</li>
+            </ul>
+
+            <img class="img-ilustrativa" src="imagens/atracao_repulsao.png" alt="Dois ímãs mostrando atração e repulsão entre seus polos">
+
+            <div class="highlight-box">
+                <strong>O Princípio da Inseparabilidade:</strong> Diferente da eletricidade, onde você pode isolar um elétron (carga negativa), <em>não existem monopolos magnéticos</em> na natureza. Se você pegar um ímã e quebrá-lo exatamente ao meio, você não ficará com um Polo Norte em uma mão e um Polo Sul na outra. Cada pedaço se reorganizará imediatamente, formando dois novos ímãs completos, cada um com seu próprio Norte e Sul!
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #e67e22;">
+            <h2>O Campo Magnético ($\vec{B}$)</h2>
+            <p>A força de um ímã não age apenas quando ele encosta no metal. Ele cria uma "zona de influência" tridimensional ao seu redor, que chamamos de <strong>Campo Magnético</strong> (representado na física pela letra $\vec{B}$).</p>
+            
+            <p>Para visualizar essa força invisível, utilizamos o conceito de <strong>Linhas de Força</strong> (ou linhas de indução). Por convenção física, essas linhas de energia <strong>nascem no Polo Norte e morrem no Polo Sul</strong> na parte externa do ímã.</p>
+            
+            <img class="img-ilustrativa" src="imagens/campo_magnetico.png" alt="Linhas de força do campo magnético saindo do Norte e entrando no Sul">
+
+            <p>A intensidade do campo magnético é medida no Sistema Internacional (SI) em <strong>Tesla (T)</strong>. Outra unidade muito comum, porém menor, é o Gauss (G), onde:</p>
+            
+            <div class="formula">
+                $$1 \text{ Tesla} = 10.000 \text{ Gauss}$$
+            </div>
+
+            <div class="highlight-box">
+                <strong>Ressonância Magnética (RM):</strong> O planeta Terra é um ímã gigante, mas seu campo magnético é fraco, medindo cerca de $0.00005 \text{ T}$ (50 µT). Já um equipamento de Ressonância Magnética clínico opera com campos entre <strong>$1.5 \text{ T}$ e $3.0 \text{ T}$</strong>. Ou seja, ao entrar na sala de RM, o paciente está sendo submetido a um campo magnético dezenas de milhares de vezes mais forte que o da própria Terra!
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #9b59b6;">
+            <h2>Classificação Magnética dos Materiais</h2>
+            <p>Como os diferentes elementos da tabela periódica reagem quando são colocados dentro de um campo magnético? A resposta microscópica está na forma como os elétrons giram (spin) ao redor de seus átomos. Baseado nisso, dividimos os materiais em três grandes famílias:</p>
+
+            <div class="mind-map-container">
+                <div class="node-center">Como os Materiais Reagem ao Ímã?</div>
+                
+                <div class="branches">
+                    <div class="node-branch" style="border-color: #e74c3c;">
+                        <h3>Ferromagnéticos</h3>
+                        <p>São <strong>fortemente atraídos</strong> pelo campo magnético. Seus átomos se alinham perfeitamente com o ímã.</p>
+                        <span style="color: #e74c3c; font-weight: bold;">Ex: Ferro, Cobalto, Níquel.</span>
+                    </div>
+                    
+                    <div class="node-branch" style="border-color: #f39c12;">
+                        <h3>Paramagnéticos</h3>
+                        <p>São <strong>fracamente atraídos</strong>. A atração existe, mas é tão pequena que mal percebemos no dia a dia.</p>
+                        <span style="color: #f39c12; font-weight: bold;">Ex: Alumínio, Gadolínio, Platina.</span>
+                    </div>
+                    
+                    <div class="node-branch" style="border-color: #3498db;">
+                        <h3>Diamagnéticos</h3>
+                        <p>São <strong>fracamente repelidos</strong> pelo campo magnético. Eles tentam fugir do ímã, gerando um campo oposto mínimo.</p>
+                        <span style="color: #3498db; font-weight: bold;">Ex: Água, Cobre, Ouro.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" style="border-left-color: #2ecc71;">
+            <h2>Aplicação Crítica na Radiologia: Segurança e Contraste</h2>
+            <p>Entender a classificação magnética dos materiais não é apenas teoria; é uma questão de <strong>vida ou morte</strong> dentro do setor de imagem!</p>
+
+            <ul>
+                <li><strong>O Efeito Míssil (Segurança):</strong> O magneto de uma máquina de Ressonância Magnética fica <em>sempre ligado</em>. Se um maqueiro entrar na sala com um cilindro de oxigênio ou uma cadeira de rodas feita de aço comum (material <strong>Ferromagnético</strong>), o equipamento atrairá esse objeto com uma força violenta, transformando-o em um míssil fatal. Por isso, as salas de RM exigem rigorosos testes com detectores de metal.</li>
+                <br>
+                <li><strong>Meios de Contraste (Gadolínio):</strong> Na RM, não usamos iodo como na tomografia. Utilizamos o Gadolínio. Lembra da classificação dele? Ele é um elemento <strong>Paramagnético</strong>. Ao ser injetado no paciente, ele altera levemente o campo magnético local dos tecidos patológicos, fazendo com que tumores e lesões "brilhem" e se destaquem na imagem gerada!</li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <footer style="text-align: center; color: var(--light-text); padding: 20px; font-size: 0.85em;">
+        <p>&copy; 2026 - Física - Radiologia | Desenvolvido por Everton Castro</p>
+    </footer>
+
+</body>
+</html>
