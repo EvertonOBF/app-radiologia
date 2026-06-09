@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado 2: Teoria e Fundamentos de Eletrodinâmica na Radiologia</title>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f4f7f6;
+            --text-color: #444444;
+            --light-text: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .question-block {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .question-block p {
+            text-align: justify;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            background: #f8f9fa;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .options li:hover {
+            background: #e8f4f8;
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .options li.correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .options li.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 6px;
+            color: var(--secondary-color);
+            text-align: justify;
+        }
+
+        .explanation strong {
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--light-text);
+            padding: 20px;
+            font-size: 0.85em;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="etapa3.html">← Retornar aos Módulos</a>
+    </div>
+
+    <div class="container">
+        
+        <div class="header-section">
+            <h1>Simulado 2: Eletrodinâmica Teórica para Radiologia</h1>
+            <p style="color: var(--light-text);">Foco em conceitos, análises e propriedades físicas.</p>
+        </div>
+
+        <div class="question-block" style="border-left-color: #3498db;">
+            <p><strong>1.</strong> O funcionamento estável dos componentes eletrônicos no console de comando de raios X depende da compreensão correta sobre como os parâmetros elétricos agem nos condutores. Analise as seguintes afirmações sobre as grandezas fundamentais da eletrodinâmica:</p>
+            <p>I. A diferença de potencial (tensão) é a medida da energia fornecida a cada unidade de carga elétrica para que ela execute movimento entre dois pontos distintos.<br>
+            II. A corrente elétrica que alimenta o circuito do tubo de raios X é composta pelo fluxo ordenado de prótons arrancados mecanicamente do cátodo.<br>
+            III. Pela convenção histórica da física, o sentido convencional da corrente elétrica em um circuito é oposto ao sentido real do deslocamento dos elétrons livres.</p>
+            <p>É correto o que se afirma em:</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">A) Apenas I.</li>
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">B) Apenas II.</li>
+                <li onclick="checkAnswer(this, true, 'exp1')" data-correct="true">C) Apenas I e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">D) Apenas II e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">E) I, II e III.</li>
+            </ul>
+            <div id="exp1" class="explanation">
+                <strong>Análise do Mentor:</strong> 
+                <br>• <strong>Item I (Verdadeiro):</strong> A Tensão ou DDP é precisamente o trabalho energético realizado por unidade de carga para promover o seu deslocamento.
+                <br>• <strong>Item II (Falso):</strong> A corrente elétrica em condutores metálicos é o fluxo ordenado de <em>elétrons</em> (cargas negativas livres), e não de prótons, que estão fixos nos núcleos atômicos.
+                <br>• <strong>Item III (Verdadeiro):</strong> Historicamente, convencionou-se que a corrente flui do polo positivo para o negativo, o que é o oposto do movimento físico real dos elétrons livres (que migram em direção ao polo positivo).
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #e67e22;">
+            <p><strong>2.</strong> O tubo de raios X opera convertendo energia elétrica sob severas condições operacionais. Sobre o Efeito Joule e os desafios térmicos associados à operação desses equipamentos, avalie as afirmativas abaixo:</p>
+            <p>I. O efeito Joule ocorre devido às colisões mecânicas dos elétrons em movimento contra os átomos do material condutor, transferindo energia que se dissipa na forma de energia térmica (calor).<br>
+            II. Em uma ampola de raios X, o efeito Joule é um fenômeno útil e induzido propositalmente no filamento do cátodo para viabilizar a emissão termoiônica.<br>
+            III. No alvo metálico do ânodo, o aquecimento térmico massivo gerado durante a colisão eletrônica é considerado uma consequência indesejada que exige sistemas eficientes de resfriamento.</p>
+            <p>É correto o que se afirma em:</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">A) Apenas I.</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">B) Apenas I e II.</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">C) Apenas II e III.</li>
+                <li onclick="checkAnswer(this, true, 'exp2')" data-correct="true">D) I, II e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">E) Apenas I e III.</li>
+            </ul>
+            <div id="exp2" class="explanation">
+                <strong>Análise do Mentor:</strong> Todos os itens estão corretos. O efeito Joule descreve a conversão de energia elétrica em térmica devido à resistência oposta pelos materiais (Item I). No filamento do cátodo, necessitamos desse aquecimento para criar a nuvem de elétrons livres (Item II). No entanto, a colisão dos elétrons contra o alvo do ânodo gera mais de 99% de calor puro e apenas 1% de radiação, tornando o controle e resfriamento térmico fatores críticos na radiologia (Item III).
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #9b59b6;">
+            <p><strong>3.</strong> Um tecnólogo em radiologia deve dominar as unidades de medida oficiais e as relações dimensionais para calibrar e operar painéis de controle sem cometer erros técnicos. Analise a consistência física das seguintes proposições:</p>
+            <p>I. A unidade de potência elétrica, o Watt (W), pode ser expressa de forma deduzida através do Sistema Internacional como o produto entre Volt e Ampere ($\text{V} \cdot \text{A}$).<br>
+            II. A unidade de resistência elétrica, o Ohm ($\Omega$), é obtida matematicamente pela razão entre a tensão elétrica e a intensidade de corrente ($\text{V/A}$).<br>
+            III. Fisicamente, a unidade Volt (V) indica a quantidade de potência fornecida por unidade de tempo, sendo traduzida pela razão Joule por segundo ($\text{J/s}$).</p>
+            <p>É correto o que se afirma em:</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, true, 'exp3')" data-correct="true">A) Apenas I e II.</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">B) Apenas I e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">C) Apenas II e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">D) Apenas II.</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">E) I, II e III.</li>
+            </ul>
+            <div id="exp3" class="explanation">
+                <strong>Análise do Mentor:</strong> 
+                <br>• <strong>Item I (Verdadeiro):</strong> Como $P = V \cdot I$, a unidade de potência (Watt) corresponde perfeitamente a $\text{Volt} \cdot \text{Ampere}$.
+                <br>• <strong>Item II (Verdadeiro):</strong> Da 1ª Lei de Ohm isolamos $R = \frac{V}{I}$, gerando a unidade $\text{Volt por Ampere} = \Omega$.
+                <br>• <strong>Item III (Falso):</strong> O Volt mede potencial elétrico e equivale a Joule por <em>Coulomb</em> ($\text{J/C}$), denotando energia por unidade de carga. A razão Joule por segundo ($\text{J/s}$) define, na verdade, o Watt (potência).
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #e74c3c;">
+            <p><strong>4.</strong> Para evitar quedas drásticas na tensão da rede e aquecimentos perigosos nas tubulações elétricas das salas de exames, o dimensionamento dos cabos deve seguir critérios físicos estritos. Com base na Segunda Lei de Ohm, avalie as afirmativas:</p>
+            <p>I. A resistividade ($\rho$) é uma propriedade intrínseca que depende da natureza molecular do material e da sua temperatura, e sua unidade oficial no SI é o Ohm-metro ($\Omega \cdot \text{m}$).<br>
+            II. Um cabo elétrico de alimentação mais longo apresentará maior resistência elétrica ativa, elevando o desperdício de energia por efeito Joule ao longo do trajeto.<br>
+            III. Se aumentarmos a espessura (área da seção transversal) de um condutor, sua capacidade de oposição à passagem de cargas aumentará proporcionalmente.</p>
+            <p>É correto o que se afirma em:</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">A) Apenas I.</li>
+                <li onclick="checkAnswer(this, true, 'exp4')" data-correct="true">B) Apenas I e II.</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">C) Apenas II e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">D) Apenas I e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">E) I, II e III.</li>
+            </ul>
+            <div id="exp4" class="explanation">
+                <strong>Análise do Mentor:</strong> 
+                <br>• <strong>Item I (Verdadeiro):</strong> A resistividade mede a oposição específica do material e possui unidade $\Omega \cdot \text{m}$ no SI (Atenção: na prova oficial há uma pegadinha listando a unidade falsa $\Omega/\text{m}$).
+                <br>• <strong>Item II (Verdadeiro):</strong> A resistência é diretamente proporcional ao comprimento ($L$). Cabos mais longos possuem maior resistência e dissipam mais calor.
+                <br>• <strong>Item III (Falso):</strong> A área de seção transversal é <em>inversamente</em> proporcional à resistência elétrica. Fios mais grossos diminuem a resistência elétria, agindo como um corredor mais amplo que facilita o fluxo de elétrons.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #1abc9c;">
+            <p><strong>5.</strong> A produção física de feixes de radiação diagnóstica no interior da ampola de Coolidge é o resultado direto de interações eletrodinâmicas controladas. Avalie as descrições conceituais desse mecanismo:</p>
+            <p>I. A aplicação da alta tensão ($kVp$) estabelece um campo elétrico intenso que acelera fortemente os elétrons do polo negativo (cátodo) ao polo positivo (ânodo).<br>
+            II. Durante a colisão no alvo do ânodo, o processo apresenta baixíssima eficiência física: cerca de $99\%$ da energia cinética converte-se em energia térmica (calor) e apenas $1\%$ torna-se raios X.<br>
+            III. A radiação de frenamento (Bremsstrahlung) ocorre quando os elétrons acelerados colidem e ejetam obrigatoriamente um elétron das camadas eletrônicas internas (como a camada K) do tungstênio.</p>
+            <p>É correto o que se afirma em:</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, true, 'exp5')" data-correct="true">A) Apenas I e II.</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">B) Apenas I e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">C) Apenas II e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">D) Apenas II.</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">E) I, II e III.</li>
+            </ul>
+            <div id="exp5" class="explanation">
+                <strong>Análise do Mentor:</strong> 
+                <br>• <strong>Item I (Verdadeiro):</strong> A altíssima diferença de potencial ($kV$) serve exclusivamente para transferir energia potencial elétrica e convertê-la em energia cinética de aceleração nos elétrons.
+                <br>• <strong>Item II (Verdadeiro):</strong> A eficiência de um tubo convencional é baixíssima, gerando imensa perda térmica e pouca eficiência radiológica.
+                <br>• <strong>Item III (Falso):</strong> A radiação de frenamento (Bremsstrahlung) ocorre pela desaceleração e desvio do elétron ao interagir com o <em>campo nuclear</em> do átomo, gerando um espectro contínuo. O fenômeno de ejeção de elétrons de camadas internas descreve a radiação <em>característica</em>, que exibe picos discretos.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: var(--secondary-color);">
+            <p><strong>6.</strong> Considere os princípios teóricos que governam os circuitos de proteção do painel estabilizador. Analise as propriedades de proporcionalidade matemática da 1ª Lei de Ohm e das relações de Potência:</p>
+            <p>I. Sob uma resistência elétrica ôhmica perfeitamente constante, a intensidade da corrente elétrica estabelecida é diretamente proporcional à diferença de potencial aplicada nos terminais.<br>
+            II. Caso a tensão de alimentação de um circuito seja duplicada mantendo-se a resistência constante, a potência elétrica total consumida pelo sistema quadruplicará.<br>
+            III. A potência elétrica total convertida por unidade de tempo indica a rapidez com que a energia elétrica realiza trabalho, sendo diretamente proporcional tanto à corrente quanto à tensão do disparo.</p>
+            <p>É correto o que se afirma em:</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">A) Apenas I.</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">B) Apenas I e II.</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">C) Apenas II e III.</li>
+                <li onclick="checkAnswer(this, true, 'exp6')" data-correct="true">D) I, II e III.</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">E) Apenas I e III.</li>
+            </ul>
+            <div id="exp6" class="explanation">
+                <strong>Análise do Mentor:</strong> Todas as proposições são fisicamente corretas. Pela 1ª Lei de Ohm, corrente e tensão marcham juntas de forma proporcional se a resistência for estável (Item I). Analisando a equação combinada de potência $P = \frac{V^2}{R}$, observamos que a potência varia com o quadrado da tensão; logo, duplicar a voltagem eleva a potência em 4 vezes (Item II). Por fim, o conceito de potência mede a taxa de energia convertida por segundo ($P = V \cdot I$), mostrando dependência linear direta de ambos os fatores elétricos (Item III).
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 - Portal Radiologia | Desenvolvimento Educacional Interativo</p>
+    </footer>
+
+    <script>
+        function checkAnswer(element, isCorrect, expId) {
+            const parent = element.parentElement;
+            
+            if (parent.classList.contains('answered')) return;
+            parent.classList.add('answered');
+
+            const options = parent.querySelectorAll('li');
+
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+                options.forEach(opt => {
+                    if (opt.getAttribute('data-correct') === 'true') {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            document.getElementById(expId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>

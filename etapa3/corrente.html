@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudo: Corrente Elétrica - Portal Radiologia</title>
     
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    
+
     <script>
         MathJax = {
             tex: {
@@ -280,7 +279,7 @@
 <body>
 
     <div class="navbar">
-        <a href="../index.html">← Voltar para o Portal</a>
+        <a href="etapa3.html">← Voltar para o Portal</a>
         <a href="magnetismo.html">Próximo: Magnetismo →</a>
     </div>
 
@@ -478,17 +477,28 @@
         </div>
 
         <div class="content-section" style="border-left-color: #34495e;">
-            <h2>Aplicação na Radiologia: mA e kVp</h2>
-            <p>Por que os técnicos de radiologia estudam isso? Porque dentro da ampola de raios-X, esses conceitos são a essência para a geração da imagem!</p>
+    <h2>Aplicação na Radiologia: mA e kVp</h2>
+        <p>Por que os técnicos de radiologia estudam isso? Porque dentro da ampola de raios-X, esses conceitos são a essência para a geração da imagem!</p>
 
-            <img class="img-ilustrativa" src="imagens/imagem3.png" alt="Tubo de raios-x mostrando fluxo do cátodo para o ânodo">
+        <img class="img-ilustrativa" src="imagens/imagem3.png" alt="Tubo de raios-x mostrando fluxo do cátodo para o ânodo">
 
-            <ul>
-                <li><strong>O "mA" (Miliamperagem):</strong> Refere-se à <em>Corrente</em>. Ao ajustar o mA no painel do equipamento, o técnico está decidindo <strong>quantos elétrons</strong> vão viajar do cátodo para o ânodo em um dado tempo. Mais corrente = mais elétrons colidindo com o alvo = maior <em>quantidade</em> de raios-X produzidos.</li>
-                <br>
-                <li><strong>O "kVp" (Quilovoltagem de Pico):</strong> Refere-se à <em>Tensão</em>. É a extrema força eletromotriz que acelera esses elétrons em direção ao alvo (ânodo). Maior kVp = os elétrons ganham mais energia cinética = resultando em raios-X com maior <em>energia e poder de penetração</em> nos tecidos.</li>
-            </ul>
-        </div>
+        <p><strong>O Processo de Geração de Raios X no Tubo:</strong></p>
+        <ol style="margin-bottom: 25px; padding-left: 20px; text-align: justify;">
+            <li style="margin-bottom: 8px;"><strong>Emissão Termoiônica:</strong> A corrente elétrica aquece o filamento do <strong>Cátodo</strong> (polo negativo) por efeito Joule, criando uma nuvem de elétrons livres.</li>
+            <li style="margin-bottom: 8px;"><strong>Aceleração Eletrostática:</strong> A alta tensão é aplicada no circuito, fazendo com que esses elétrons sejam atraídos e acelerados em velocidade extrema através do vácuo.</li>
+            <li style="margin-bottom: 8px;"><strong>Colisão e Desaceleração:</strong> Os elétrons colidem bruscamente contra o alvo metálico do <strong>Ânodo</strong> (polo positivo). Essa frenagem repentina converte a energia cinética em <strong style="color: #e74c3c;">99% de calor</strong> e apenas <strong style="color: #2ecc71;">1% de feixe de Raios X</strong>.</li>
+        </ol>
+
+        <p>No painel de controle, você gerencia esse processo através de dois comandos fundamentais:</p>
+        <ul style="list-style: none; padding: 0; text-align: justify;">
+            <li style="background: #f8f9fa; padding: 15px; border-left: 4px solid #3498db; margin-bottom: 12px; border-radius: 4px;">
+                <strong>O "mA" (Miliamperagem) &rarr; Controle da Corrente:</strong> Determina a temperatura do filamento. Quanto maior o mA, mais elétrons são liberados no cátodo, aumentando a <strong>quantidade</strong> de raios-X produzidos no disparo.
+            </li>
+            <li style="background: #f8f9fa; padding: 15px; border-left: 4px solid #e67e22; border-radius: 4px;">
+                <strong>O "kVp" (Quilovoltagem de Pico) &rarr; Controle da Tensão:</strong> Determina a força de atração entre os polos. Quanto maior o kVp, mais rápido os elétrons viajam e mais forte colidem, gerando raios-X com maior <strong>energia e poder de penetração</strong> para atravessar os tecidos do paciente.
+            </li>
+        </ul>
+    </div>
         <div class="content-section" style="border-left-color: #8e44ad;">
             <h2>Corrente Contínua (CC) vs. Corrente Alternada (CA)</h2>
             <p>Até agora, falamos do fluxo de elétrons como se eles sempre viajassem em uma única direção. Mas sabia que existem duas "modalidades" de trânsito para essas partículas?</p>

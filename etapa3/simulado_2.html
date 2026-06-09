@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado: Cálculos de Eletrodinâmica na Radiologia</title>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --bg-color: #f4f7f6;
+            --text-color: #444444;
+            --light-text: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .question-block {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .question-block p {
+            text-align: justify;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            background: #f8f9fa;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .options li:hover {
+            background: #e8f4f8;
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .options li.correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .options li.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 6px;
+            color: var(--secondary-color);
+            text-align: justify;
+        }
+
+        .explanation strong {
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--light-text);
+            padding: 20px;
+            font-size: 0.85em;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="etapa3.html">← Retornar aos Módulos</a>
+    </div>
+
+    <div class="container">
+        
+        <div class="header-section">
+            <h1>Simulado: Eletrodinâmica para Radiologia</h1>
+            <p style="color: var(--light-text);">Foco em cálculos e fórmulas essenciais.</p>
+        </div>
+
+        <div class="question-block" style="border-left-color: var(--primary-color);">
+            <p><strong>1.</strong> Um tubo de raios X de alta capacidade opera com uma tensão de aceleração de $100\text{ kV}$ ($100.000\text{ V}$) e uma corrente de tubo ajustada em $500\text{ mA}$ ($0,5\text{ A}$). Calcule a potência elétrica desenvolvida no tubo durante esse disparo técnico.</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">A) $500\text{ kW}$</li>
+                <li onclick="checkAnswer(this, true, 'exp1')" data-correct="true">B) $50\text{ kW}$</li>
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">C) $5\text{ kW}$</li>
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">D) $250\text{ kW}$</li>
+                <li onclick="checkAnswer(this, false, 'exp1')" data-correct="false">E) $25\text{ kW}$</li>
+            </ul>
+            <div id="exp1" class="explanation">
+                <strong>Resolução do Mentor:</strong> Para encontrar a potência elétrica ($P$), utilizamos a expressão matemática fundamental: $P = V \cdot I$. Convertendo os valores para as unidades do Sistema Internacional (SI), temos a tensão $V = 100.000\text{ V}$ e a corrente $I = 0,5\text{ A}$. Efetuando a multiplicação: $P = 100.000 \cdot 0,5 = 50.000\text{ W}$. Dividindo por $1.000$ para converter para quilowatts, obtemos exatamente $\mathbf{50\text{ kW}}$.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #f39c12;">
+            <p><strong>2.</strong> O filamento do cátodo de um tubo de raios X moderno apresenta uma resistência elétrica ôhmica de $4\ \Omega$. Para obter o aquecimento térmico necessário para a emissão termoiônica, o gerador elétrico injeta uma corrente estável de $5\text{ A}$ através desse componente. Qual é a tensão elétrica (DDP) aplicada sobre ele?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">A) $1,25\text{ V}$</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">B) $0,8\text{ V}$</li>
+                <li onclick="checkAnswer(this, true, 'exp2')" data-correct="true">C) $20\text{ V}$</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">D) $80\text{ V}$</li>
+                <li onclick="checkAnswer(this, false, 'exp2')" data-correct="false">E) $16\text{ V}$</li>
+            </ul>
+            <div id="exp2" class="explanation">
+                <strong>Resolução do Mentor:</strong> Aplicando diretamente a 1ª Lei de Ohm ($V = R \cdot I$), onde buscamos a tensão elétrica ($V$), conhecemos a resistência do filamento de tungstênio ($R = 4\ \Omega$) e a intensidade da corrente elétrica ($I = 5\text{ A}$). Substituindo na fórmula: $V = 4 \cdot 5 = \mathbf{20\text{ V}}$.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #e74c3c;">
+            <p><strong>3.</strong> Um equipamento de Ressonância Magnética (RM) consome uma potência média constante de $40\text{ kW}$ quando está realizando sequências ativas de exames. Se este sistema operar de forma contínua por um total de $5\text{ horas}$ ao longo de um plantão diário, qual será a energia elétrica total consumida por este equipamento?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">A) $8\text{ kWh}$</li>
+                <li onclick="checkAnswer(this, true, 'exp3')" data-correct="true">B) $200\text{ kWh}$</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">C) $45\text{ kWh}$</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">D) $120\text{ kWh}$</li>
+                <li onclick="checkAnswer(this, false, 'exp3')" data-correct="false">E) $800\text{ kWh}$</li>
+            </ul>
+            <div id="exp3" class="explanation">
+                <strong>Resolução do Mentor:</strong> A energia elétrica consumida ($\Delta E$) é dada pela relação entre a potência do dispositivo ($P$) e o tempo de ativação ($\Delta t$): $\Delta E = P \cdot \Delta t$. Mantendo a potência em quilowatts ($40\text{ kW}$) e o tempo em horas ($5\text{ h}$), multiplicamos os fatores: $\Delta E = 40 \cdot 5 = \mathbf{200\text{ kWh}}$.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #9b59b6;">
+            <p><strong>4.</strong> Um aparelho de raios X portátil utilizado em leitos hospitalares é conectado a uma tomada padrão de rede elétrica de $220\text{ V}$. No exato instante do disparo de alta potência, o sistema eletrônico exige uma potência instantânea de $4,4\text{ kW}$ ($4.400\text{ W}$). Determine a intensidade da corrente elétrica drenada da linha de alimentação nesse segundo de exposição.</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, true, 'exp4')" data-correct="true">A) $20\text{ A}$</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">B) $50\text{ A}$</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">C) $0,05\text{ A}$</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">D) $2,2\text{ A}$</li>
+                <li onclick="checkAnswer(this, false, 'exp4')" data-correct="false">E) $10\text{ A}$</li>
+            </ul>
+            <div id="exp4" class="explanation">
+                <strong>Resolução do Mentor:</strong> Partindo da fórmula de potência elétrica $P = V \cdot I$, precisamos isolar a variável da corrente elétrica ($I$). Reformulando a equação, obtemos: $I = \frac{P}{V}$. Substituindo a potência expressa em Watts ($4.400\text{ W}$) e a tensão em Volts ($220\text{ V}$): $I = \frac{4.400}{220} = \mathbf{20\text{ A}}$.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: #1abc9c;">
+            <p><strong>5.</strong> Durante uma calibração preventiva no circuito interno do painel de controle, o técnico de manutenção constata uma diferença de potencial estável de $220\text{ V}$ applied sobre um resistor de proteção. O multímetro indica que uma corrente de $2\text{ A}$ atravessa o componente. Qual é o valor da resistência elétrica apresentada por esse resistor?</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">A) $440\ \Omega$</li>
+                <li onclick="checkAnswer(this, true, 'exp5')" data-correct="true">B) $110\ \Omega$</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">C) $22\ \Omega$</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">D) $44\ \Omega$</li>
+                <li onclick="checkAnswer(this, false, 'exp5')" data-correct="false">E) $55\ \Omega$</li>
+            </ul>
+            <div id="exp5" class="explanation">
+                <strong>Resolução do Mentor:</strong> Utilizando a variação algébrica da 1ª Lei de Ohm para isolar a resistência elétrica ($R$), usamos a fórmula: $R = \frac{V}{I}$. Inserindo os dados mensurados pelo técnico ($V = 220\text{ V}$ e $I = 2\text{ A}$): $R = \frac{220}{2} = \mathbf{110\ \Omega}$.
+            </div>
+        </div>
+
+        <div class="question-block" style="border-left-color: var(--secondary-color);">
+            <p><strong>6.</strong> O tubo de raios X de um tomógrafo computadorizado opera sob uma alta tensão de aceleração regulada em $80\text{ kV}$ ($80.000\text{ V}$). Sabendo que o system desenvolve uma potência elétrica ativa de $32\text{ kW}$ ($32.000\text{ W}$) durante a varredura helicoidal, determine o valor correspondente da corrente do tubo expressa na unidade clínica de miliamperes ($\text{mA}$).</p>
+            <ul class="options">
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">A) $0,4\text{ mA}$</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">B) $4\text{ mA}$</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">C) $40\text{ mA}$</li>
+                <li onclick="checkAnswer(this, true, 'exp6')" data-correct="true">D) $400\text{ mA}$</li>
+                <li onclick="checkAnswer(this, false, 'exp6')" data-correct="false">E) $2.500\text{ mA}$</li>
+            </ul>
+            <div id="exp6" class="explanation">
+                <strong>Resolução do Mentor:</strong> Primeiramente, isolamos a corrente na equação de potência: $I = \frac{P}{V}$. Substituindo os valores em unidades fundamentais ($P = 32.000\text{ W}$ e $V = 80.000\text{ V}$): $I = \frac{32.000}{80.000} = 0,4\text{ A}$. Como a questão solicita o resultado na escala clínica de miliamperes ($\text{mA}$), e sabendo que $1\text{ A} = 1.000\text{ mA}$, multiplicamos o valor obtido por $1.000$: $0,4 \cdot 1.000 = \mathbf{400\text{ mA}}$.
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 - Portal Radiologia | Desenvolvimento Educacional Interativo</p>
+    </footer>
+
+    <script>
+        function checkAnswer(element, isCorrect, expId) {
+            const parent = element.parentElement;
+            
+            if (parent.classList.contains('answered')) return;
+            parent.classList.add('answered');
+
+            const options = parent.querySelectorAll('li');
+
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+                options.forEach(opt => {
+                    if (opt.getAttribute('data-correct') === 'true') {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            document.getElementById(expId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
